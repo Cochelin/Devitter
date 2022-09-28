@@ -33,6 +33,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--font-black-color);
 }
 
 html,
@@ -145,4 +146,13 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+ a {
+  color: var(--font-black-color);
+  text-decoration: none;
+  outline: none;
+}
+ a:hover,
+a:active {
+  text-decoration: none;
 }
