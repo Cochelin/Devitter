@@ -76,6 +76,7 @@ const Number = styled.span`
 
 export const Twit = ({ profile, name, id, contents }) => {
   // 컴포넌트 사용 예제
+  // profile은 img src에 들어갈 내용이며, 추후 api 문서 업데이트 시 수정될 예정입니다.
   // -------------------
   // <Twit
   //   profile={testImg}
