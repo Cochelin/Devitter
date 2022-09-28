@@ -45,8 +45,21 @@ cursor:pointer;
     & > span {
         margin-left:10px
     }
+
 }
 `
+const LogoutBtn = styled.button`
+width:48px;
+height:48px;
+border:none;
+padding: 10px;
+background: linear-gradient(180deg, #62FF5F 0%, rgba(96, 70, 255, 0) 100%);
+border-radius: 30px;
+margin-left:16px;
+& img {margin : 0 auto;}
+`
+
+
 const FlexWarp = styled.div`
 display:flex;
 align-items:center;
@@ -63,8 +76,22 @@ align-items:center;
 & > .ImgTwitterLogo {
     margin-left:20px
 }
+@media screen and (max-width: 850px) {
+    & span {
+        display : none;
+    }
+}
 `
-const Header = () => {
+const UserSpan = styled.span`
+display:inline-block;
+@media screen and (max-width: 850px) {
+    display:none;
+}
+`
+
+const Header = ({ userName, isLogin }) => {
+    userName = '가나다'
+    isLogin = false
     return (
         <Container>
             <HeaderImgWrap>
@@ -76,14 +103,27 @@ const Header = () => {
 
             </HeaderImgWrap>
             <LoginWrap>
+                {
+                    isLogin ?
+                        <>
+                            <UserSpan>{userName}님</UserSpan>
+                            <LogoutBtn>
+                                <FlexWarp>
+                                    <img src={ImgLogin}></img>
+                                </FlexWarp>
+                            </LogoutBtn>
+                        </>
+                        :
+                        <LoginBtn>
+                            <FlexWarp>
+                                <img src={ImgLogin}></img>
+                                <span>로그인</span>
+                            </FlexWarp>
+                        </LoginBtn>
 
-                <LoginBtn>
-                    <FlexWarp>
-                        <img src={ImgLogin}></img>
-                        <span>로그인</span>
-                    </FlexWarp>
 
-                </LoginBtn>
+                }
+
             </LoginWrap>
 
         </Container>

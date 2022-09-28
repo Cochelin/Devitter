@@ -13,6 +13,9 @@ const Container = styled.div`
     box-sizing : border-box;
     padding : 0 15px 0 15px;
     width : 100%;
+    @media screen and (max-width: 850px) {
+        padding:0;
+    }
 `
 const FlexWarp = styled.div`
 display: flex;
@@ -20,6 +23,9 @@ height:60px;
 align-items : center;
 font-weight:700;
 margin-left : -10px
+@media screen and (max-width: 850px) {
+    margin-left:0;
+}
 `
 const ListClickArea = styled.div`
 
@@ -28,6 +34,7 @@ const ListClickArea = styled.div`
     padding:10px;
     text-decoration:none
 }
+
 & a img {
     margin-bottom:-5px
 }
@@ -41,6 +48,26 @@ margin-bottom:-2px;
 }
 & a.active {
     color: var(--point-green-color);
+}
+@media screen and (max-width: 850px) {
+    width:33%;
+    position:relative;
+    &::after {
+        content : '';
+        position: absolute;
+        top:0;
+        right:0;
+        width:1px;
+        height:100%;
+        background-color: var(--dark-gray-color);
+    }
+    &:last-child::after{
+        display:none;
+    }
+    & a {
+        font-size : 14px;
+        text-align:center;
+    }
 }
 `
 
