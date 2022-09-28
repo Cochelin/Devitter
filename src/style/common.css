@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "IBMPlexSansKR-Regular";
+  src: url(../assets/font/IBMPlexSansKR-Regular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSansKR-Medium";
+  src: url(../assets/font/IBMPlexSansKR-Medium.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSansKR-Bold";
+  src: url(../assets/font/IBMPlexSansKR-Bold.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
