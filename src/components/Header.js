@@ -11,9 +11,11 @@ const Container = styled.div`
     display: table;
 
     box-sizing : border-box;
-    padding : 0 15px 0 15px;
+    padding : 0 48px 0 48px;
     width : 100%;
-
+    @media screen and (max-width: 850px) {
+        padding : 0 15px 0 15px;
+    }
 `
 const HeaderImgWrap = styled.div`
 display:table-cell;
