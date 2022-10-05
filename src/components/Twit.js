@@ -1,16 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { ReactComponent as BookmarkEmpty } from "./../assets/img/bookMarker_empty.svg";
-import { ReactComponent as LinkIcon } from "./../assets/img/link_icon.svg";
-import { ReactComponent as HeartIcon } from "./../assets/img/heart_icon.svg";
-import { ReactComponent as RetweetIcon } from "./../assets/img/retweet_icon.svg";
+import { ReactComponent as BookmarkEmpty } from './../assets/img/bookMarker_empty.svg';
+import { ReactComponent as LinkIcon } from './../assets/img/link_icon.svg';
+import { ReactComponent as HeartIcon } from './../assets/img/heart_icon.svg';
+import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg';
 
 // 스타일 컴포넌트와 본문을 분리할까? > 회의 때 정하기
 
-const Box = styled.article`
+const Box = styled.div`
   margin: 20px;
-  width: 350px;
+  min-width: 350px;
+  max-width: 350px;
   height: max-content;
   border-radius: 24px;
   padding: 13px;
@@ -90,8 +91,8 @@ export const Twit = ({ profile, name, id, contents }) => {
       <Header>
         <Profile src={profile} />
         <NameSpace>
-          <span className="name">{name}</span>
-          <span className="id">@{id}</span>
+          <span className='name'>{name}</span>
+          <span className='id'>@{id}</span>
         </NameSpace>
         <BookMarkContianer>
           <BookmarkEmpty />

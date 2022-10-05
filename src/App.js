@@ -1,9 +1,14 @@
-import Category from './components/Category/Category';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
+
 function App() {
   return (
-    <div className='App'>
-      <Category />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

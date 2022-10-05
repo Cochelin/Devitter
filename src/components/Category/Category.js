@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Accordion from './Accordion';
 
 const CategoryBox = styled.aside`
-  width: 280px;
+  min-width: 280px;
   height: 940px;
   padding: 48px;
 `;
