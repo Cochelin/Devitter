@@ -28,7 +28,7 @@ vertical-align:middle;
 `
 const LoginWrap = styled.div`
 display:table-cell;
-widht:50%;
+width:50%;
 text-align:right;
 vertical-align:middle; 
 `

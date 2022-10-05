@@ -105,11 +105,11 @@ const Gnb = ({ nowTab }) => {
         <Container>
             <FlexWarp>
                 <ListClickArea>
-                    <a href='#' class={nowTab === 'all' ? 'active' : null}>
+                    <a href='#' className={nowTab === 'all' ? 'active' : null}>
 
                         {nowTab === 'all' ?
-                            <img class='IconGNbList' src={IconGNbListActive} /> :
-                            <img class='IconGNbList' src={IconGNbList} />
+                            <img className='IconGNbList' src={IconGNbListActive} /> :
+                            <img className='IconGNbList' src={IconGNbList} />
                         }
                         전체
 
@@ -117,19 +117,19 @@ const Gnb = ({ nowTab }) => {
                 </ListClickArea>
                 <ListClickArea>
 
-                    <a href='#' class={nowTab === 'today' ? 'active' : null}>
+                    <a href='#' className={nowTab === 'today' ? 'active' : null}>
 
                         Today
 
                     </a>
                 </ListClickArea>
                 <ListClickArea>
-                    <a href='#' class={nowTab === 'bookmark' ? 'active' : null}>
+                    <a href='#' className={nowTab === 'bookmark' ? 'active' : null}>
 
                         북마크
                         {nowTab === 'bookmark' ?
-                            <img class="BookMarker" src={BookMarkerAcive} /> :
-                            <img class="BookMarker" src={BookMarker} />}
+                            <img className="BookMarker" src={BookMarkerAcive} /> :
+                            <img className="BookMarker" src={BookMarker} />}
 
                     </a>
                 </ListClickArea>
