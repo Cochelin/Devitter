@@ -1,9 +1,11 @@
 import { confirmAlert } from 'react-confirm-alert'; // Import
-import './confirm.css';
+import './css/confirm.css';
+import './css/modal.css';
 import iconClose from '../../assets/img/icon_close.png'
 import Select from './Select';
+import { useState } from 'react';
 
-const confirm = (title) => {
+const confirm = () => {
 
 
     confirmAlert({
@@ -26,7 +28,7 @@ const confirm = (title) => {
 
 
 }
-const modalSelect = (title) => {
+const modalSelect = () => {
     confirmAlert({
         customUI: ({ onClose }) => {
             return (
@@ -45,4 +47,25 @@ const modalSelect = (title) => {
 
 }
 
+const ModalUrl = ({ seturlModalOpen, urlModalOpen }) => {
+
+    return (
+        <div className='modal_url_body'>
+            <h5>북마크 추가</h5> <span><img src={iconClose} onClick={() => seturlModalOpen(!urlModalOpen)} /></span>
+            <div className='input_warp'>
+                <input type='text' placeholder='URL을 입력해 주세요.' />
+            </div>
+
+            <Select />
+
+            <div className='react-confirm-alert-button-group'>
+                <button className='one' >확인</button>
+
+            </div>
+        </div>
+    )
+}
+
+
 export { confirm, modalSelect }
+export default ModalUrl

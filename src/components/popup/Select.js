@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SelectWarp = styled.div`
 padding: 0 15px;    
-margin-top: 25px;
+margin-top: 14px;
 `
 const SelectDiv = styled.select`
 width: 100%;
