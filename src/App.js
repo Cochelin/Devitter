@@ -1,12 +1,25 @@
+import Gnb from "./components/Gnb";
+import Header from "./components/Header";
+import './style/common.css'
+import LoadingPage from "./components/Loading/LoadingPage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Practice from "./components/popup/Practice";
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+    <div>
+      <BrowserRouter>
+        <LoadingPage />
+        <Header />
+        <Gnb />
+        <Routes>
+          <Route path="/" element={<Practice />}> </Route>
+        </Routes>
+
+      </BrowserRouter>
+
     </div>
+
   );
 }
 
