@@ -32,7 +32,8 @@ const FullPage = styled.div`
     top:0;
     left:0;
     width: 100%;
-    background-image: url('${Background2}');
+    background-color: white;
+    /* background-image: url('${Background2}'); */
     background-position: 50% 50%;
     background-repeat : no-repeat;
     background-size :cover;
@@ -43,18 +44,18 @@ const FullPage = styled.div`
 `
 const LoadingPage = () => {
 
-    useEffect(() => {
-        // modal이 떠 있을 땐 스크롤 막음
-        disableScroll();
-        setTimeout(() => enableScroll(), 3000);
+  useEffect(() => {
+    // modal이 떠 있을 땐 스크롤 막음
+    disableScroll();
+    setTimeout(() => enableScroll(), 3000);
 
-    }, []);
-    return (
-        <FullPage >
-            <LogoAni />
+  }, []);
+  return (
+    <FullPage >
+      <LogoAni />
 
-        </FullPage>
-    );
+    </FullPage>
+  );
 };
 
 export default LoadingPage;

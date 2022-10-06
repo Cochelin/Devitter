@@ -5,9 +5,8 @@ import iconClose from '../../assets/img/icon_close.png'
 import Select from './Select';
 import { useState } from 'react';
 
+//Delete bookmark conmfirm
 const confirm = () => {
-
-
     confirmAlert({
         customUI: ({ onClose }) => {
             return (
@@ -28,6 +27,8 @@ const confirm = () => {
 
 
 }
+
+//add bookmark > select modal 
 const modalSelect = () => {
     confirmAlert({
         customUI: ({ onClose }) => {
@@ -47,6 +48,8 @@ const modalSelect = () => {
 
 }
 
+
+// Add bookmark modal
 const ModalUrl = ({ seturlModalOpen, urlModalOpen }) => {
 
     return (
