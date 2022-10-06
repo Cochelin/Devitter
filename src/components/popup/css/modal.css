@@ -1,0 +1,99 @@
+.modal_url_body {
+  width: 450px;
+  position: fixed;
+  bottom: 48px;
+  right: 180px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
+  color: rgb(231, 0, 0);
+  overflow: hidden;
+  opacity: 0;
+  animation: modalUrlFadeIn 0.3s forwards 0.1s;
+}
+@keyframes modalUrlFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.modal_url_body > h5 {
+  font-size: 14px;
+  margin: 20px 0 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.modal_url_body > p {
+  margin: 35px 0 25px;
+  text-align: center;
+  padding: 0 15px;
+  font-size: 14px;
+}
+.modal_url_body span {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.modal_url_body .input_warp {
+  padding: 0 15px;
+  margin-top: 20px;
+}
+.modal_url_body input {
+  width: 100%;
+  padding: 0 15px;
+  height: 40px;
+  border-radius: 3px;
+  box-shadow: inset 0px 4px 18px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.modal_floating {
+  position: fixed;
+  width: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  background-color: var(--point-green-color);
+  opacity: 0.8;
+  padding: 24px 15px;
+  animation: floating 2s forwards;
+}
+.modal_floating p {
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+@keyframes floating {
+  0% {
+    bottom: 40px;
+    opacity: 0;
+  }
+  20% {
+    bottom: 70px;
+    opacity: 0.8;
+  }
+  60% {
+    bottom: 70px;
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .modal_url_body {
+    width: 320px;
+    bottom: 180px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  .modal_floating {
+    width: 80%;
+    font-size: 14px;
+  }
+}
