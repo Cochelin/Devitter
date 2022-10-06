@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-
+import { Link } from 'react-router-dom';
 import BookMarker from '../assets/img/bookMarker_empty_16.png'
 import BookMarkerAcive from '../assets/img/bookMarker_active_16.png'
 import IconGNbList from '../assets/img/icon_gnb_list.png'
@@ -94,18 +94,18 @@ margin-bottom:-2px;
 }
 `
 
-const Gnb = ({ nowTab }) => {
-
+const Gnb = () => {
+    const [nowTab, setNowTab] = useState('all')
     /*
     nowTab 
     all , today, bookmark
     */
-    nowTab = 'all'
+
     return (
         <Container>
             <FlexWarp>
                 <ListClickArea>
-                    <a href='#' className={nowTab === 'all' ? 'active' : null}>
+                    <Link to='/' onClick={() => setNowTab('all')} className={nowTab === 'all' ? 'active' : null}>
 
                         {nowTab === 'all' ?
                             <img className='IconGNbList' src={IconGNbListActive} /> :
@@ -113,25 +113,25 @@ const Gnb = ({ nowTab }) => {
                         }
                         전체
 
-                    </a>
+                    </Link>
                 </ListClickArea>
                 <ListClickArea>
 
-                    <a href='#' className={nowTab === 'today' ? 'active' : null}>
+                    <Link to='/' onClick={() => setNowTab('today')} className={nowTab === 'today' ? 'active' : null}>
 
                         Today
 
-                    </a>
+                    </Link>
                 </ListClickArea>
                 <ListClickArea>
-                    <a href='#' className={nowTab === 'bookmark' ? 'active' : null}>
+                    <Link to='/' onClick={() => setNowTab('bookmark')} className={nowTab === 'bookmark' ? 'active' : null}>
 
                         북마크
                         {nowTab === 'bookmark' ?
                             <img className="BookMarker" src={BookMarkerAcive} /> :
                             <img className="BookMarker" src={BookMarker} />}
 
-                    </a>
+                    </Link>
                 </ListClickArea>
             </FlexWarp>
         </Container>
