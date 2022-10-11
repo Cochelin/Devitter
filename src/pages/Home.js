@@ -2,7 +2,7 @@ import Category from './../components/Category/Category';
 import { Twit } from './../components/Twit';
 import testImg from './../assets/img/bookMarker_empty.svg';
 import styled from 'styled-components';
-
+import { javascriptData } from '../static/dummyData';
 const Section = styled.section`
   display: flex;
   flex-direction: row;
@@ -40,7 +40,21 @@ const TwitContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+
+
 const Home = () => {
+  const random_rgba = (num) => {
+    var o = Math.round, r = Math.random, s = 255, l = 100;
+    return num === 1 ? 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 1 + ')' : 'rgba(' + o(r() * (s)) + ',' + o(r() * (s - l)) + l + ',' + o(r() * (s)) + ',' + 0.3 + ')';
+  }
+  const gradientMap = () => {
+    const gradientarr = []
+    const gradient = `linear-gradient(180deg, ${random_rgba(1)} 0%, ${random_rgba(2)} 100%);`
+    for (let j = 0; j < javascriptData[0].length; j++) {
+      gradientarr.push(gradient)
+    }
+    return gradientarr
+  }
   return (
     <Section>
       <Category />
@@ -50,12 +64,23 @@ const Home = () => {
           <div className='category'>취업</div>
         </ArticleInfo>
         <TwitContainer>
-          <Twit
-            profile={testImg}
-            name='TestUser'
-            id='73571D'
-            contents='트윗 컴포넌트 테스트합니다'
-          />
+          {
+            javascriptData[0].map((tweet, idx) => {
+              return (
+                <Twit
+                  profile={gradientMap()[idx]}
+                  name={tweet.value3}
+                  key={tweet.value1}
+                  link={tweet.value1}
+                  id={tweet.value3}
+                  contents={tweet.value5}
+                  retweet={tweet.value6}
+                  likes={tweet.value7}
+                />
+              )
+            })
+          }
+          {/* 
           <Twit
             profile={testImg}
             name='TestUser'
@@ -73,7 +98,7 @@ const Home = () => {
             name='TestUser'
             id='73571D'
             contents='트윗 컴포넌트 테스트합니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ'
-          />
+          /> */}
         </TwitContainer>
       </Article>
     </Section>
