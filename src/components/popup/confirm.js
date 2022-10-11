@@ -6,17 +6,17 @@ import Select from './Select';
 import { useState } from 'react';
 
 //Delete bookmark conmfirm
-const confirm = () => {
+const confirm = (head, Yes, No) => {
     confirmAlert({
         customUI: ({ onClose }) => {
             return (
                 <div className='react-confirm-alert-body'>
                     <h5></h5> <span><img src={iconClose} onClick={onClose} /></span>
-                    <p>북마크를 삭제하시겠습니까?</p>
+                    <p>{head}</p>
                     <div className='react-confirm-alert-button-group'>
-                        <button className='on' onClick={onClose}>취소</button>
+                        <button className='on' onClick={onClose}>{No}</button>
                         <button
-                            onClick={onClose} > 확인
+                            onClick={onClose} > {Yes}
                         </button>
                     </div>
                 </div>
