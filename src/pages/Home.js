@@ -6,21 +6,19 @@ import styled from 'styled-components';
 const Section = styled.section`
   display: flex;
   flex-direction: row;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
 
 const Article = styled.article`
   display: flex;
   flex-direction: column;
-  width: 75%;
 `;
 
 const ArticleInfo = styled.div`
   display: flex;
   flex-direction: column;
   height: 60px;
-  width: 100%;
   margin: 40px 0 0 32px;
   .route {
     font-weight: 400;
