@@ -80,25 +80,6 @@ const Home = () => {
               )
             })
           }
-          {/* 
-          <Twit
-            profile={testImg}
-            name='TestUser'
-            id='73571D'
-            contents='트윗 컴포넌트 테스트합니다'
-          />
-          <Twit
-            profile={testImg}
-            name='TestUser'
-            id='73571D'
-            contents='트윗 컴포넌트 테스트합니다'
-          />
-          <Twit
-            profile={testImg}
-            name='TestUser'
-            id='73571D'
-            contents='트윗 컴포넌트 테스트합니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ'
-          /> */}
         </TwitContainer>
       </Article>
     </Section>
