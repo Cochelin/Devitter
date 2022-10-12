@@ -49,6 +49,10 @@ const LoadingPage = () => {
     disableScroll();
     setTimeout(() => enableScroll(), 3000);
 
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0);
+    };
+
   }, []);
   return (
     <FullPage >
