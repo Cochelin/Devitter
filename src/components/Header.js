@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 
 // img
@@ -6,6 +6,8 @@ import ImgHeaderLogo from '../assets/img/logo_img_header.png'
 import ImgHeaderX from '../assets/img/icon_close.png'
 import ImgTwitterLogo from '../assets/img/icon_twitter_header.png'
 import ImgLogin from '../assets/img/icon_login.png'
+import LoginModal from './popup/LoginModal';
+import LogoutModal from './popup/LogoutModal';
 
 const Container = styled.div`
     display: table;
@@ -31,6 +33,7 @@ display:table-cell;
 width:50%;
 text-align:right;
 vertical-align:middle; 
+position: relative;
 `
 const LoginBtn = styled.button`
 border:none;
@@ -58,7 +61,9 @@ padding: 10px;
 background: linear-gradient(180deg, #62FF5F 0%, rgba(96, 70, 255, 0) 100%);
 border-radius: 30px;
 margin-left:16px;
+cursor: pointer;
 & img {margin : 0 auto;}
+
 `
 
 
@@ -92,8 +97,19 @@ display:inline-block;
 `
 
 const Header = ({ userName, isLogin }) => {
+    //기본 설정
     userName = '가나다'
     isLogin = false
+
+    const [isLoginModal, setIsLoginModal] = useState(<LoginModal />)
+    const [modalOpen, setModalOpen] = useState(false)
+
+
+    //로그인 되어있을 시 LogoutModal 로그아웃 되어있을 시 LoginModal
+    const LoginModalClick = () => {
+        isLogin ? setIsLoginModal(<LogoutModal setModalOpen={setModalOpen} />) : setIsLoginModal(<LoginModal setModalOpen={setModalOpen} />)
+        setModalOpen(!modalOpen)
+    }
     return (
         <Container>
             <HeaderImgWrap>
@@ -109,24 +125,29 @@ const Header = ({ userName, isLogin }) => {
                     isLogin ?
                         <>
                             <UserSpan>{userName}님</UserSpan>
-                            <LogoutBtn>
+                            <LogoutBtn onClick={LoginModalClick}>
                                 <FlexWarp>
                                     <img src={ImgLogin}></img>
                                 </FlexWarp>
                             </LogoutBtn>
+
                         </>
                         :
-                        <LoginBtn>
-                            <FlexWarp>
-                                <img src={ImgLogin}></img>
-                                <span>로그인</span>
-                            </FlexWarp>
-                        </LoginBtn>
+                        <>
+                            <LoginBtn>
+                                <FlexWarp onClick={LoginModalClick}>
+                                    <img src={ImgLogin}></img>
+                                    <span>로그인</span>
+                                </FlexWarp>
 
+                            </LoginBtn>
+
+                        </>
 
                 }
-
+                {modalOpen ? isLoginModal : null}
             </LoginWrap>
+
 
         </Container>
     );

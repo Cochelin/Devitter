@@ -5,7 +5,7 @@ import BookMarker from '../assets/img/bookMarker_empty_16.png'
 import BookMarkerAcive from '../assets/img/bookMarker_active_16.png'
 import IconGNbList from '../assets/img/icon_gnb_list.png'
 import IconGNbListActive from '../assets/img/icon_gnb_list_active.png'
-
+import { confirm } from './../components/popup/confirm'
 
 const Container = styled.div`
     display: table;
@@ -124,7 +124,7 @@ const Gnb = () => {
                     </Link>
                 </ListClickArea>
                 <ListClickArea>
-                    <Link to='/' onClick={() => setNowTab('bookmark')} className={nowTab === 'bookmark' ? 'active' : null}>
+                    <Link to='/' onClick={() => confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')} className={nowTab === 'bookmark' ? 'active' : null}>
 
                         북마크
                         {nowTab === 'bookmark' ?
