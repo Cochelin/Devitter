@@ -59,6 +59,7 @@ const BookMarkContianer = styled.span`
 
 const Contents = styled.div`
   margin: 16px 0 9px 7px;
+  line-height: 150%;
 `;
 
 const Bottom = styled.div`
