@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import LogoAni from './LogoAni';
 import Background2 from '../../assets/img/background/003.png'
 import { disableScroll, enableScroll } from './stopScroll'
+import Loding3D from './Loding3D';
 
 
 const LoadingFadeOut = keyframes`
@@ -40,7 +41,7 @@ const FullPage = styled.div`
     height: 120vh;
     transform: translateY(-10vh);
     overflow: hidden;
-    animation: ${LoadingFadeOut} 0.8s ease-in-out 3s forwards;
+    animation: ${LoadingFadeOut} 0.8s ease-in-out 2s forwards;
 `
 const LoadingPage = () => {
 
@@ -57,6 +58,7 @@ const LoadingPage = () => {
   return (
     <FullPage >
       <LogoAni />
+      <Loding3D />
 
     </FullPage>
   );
