@@ -26,6 +26,7 @@ const LoginWrap = styled.button`
     width: 100%;
     text-align: center;
     margin: 0 auto;
+    cursor: pointer;
     & p {
         width: 100%;
         font-size: 15px;
