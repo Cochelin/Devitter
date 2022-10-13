@@ -25,10 +25,10 @@ const Accordion = (props) => {
         initial={summary[0] === '인기트윗'}
         height={
           summary[0] === '인기트윗'
-            ? 19
+            ? 63
             : open
-            ? 19 + 22 + 33 * children.length
-            : 19
+            ? 63 + 22 + 25 * children.length
+            : 63
         }
       >
         <A.Detail>
