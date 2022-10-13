@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styled from "styled-components";
-
+import styled from 'styled-components';
+import { useEffect } from 'react';
 // img
 import ImgHeaderLogo from '../assets/img/logo_img_header.png'
 import ImgHeaderX from '../assets/img/icon_close.png'
@@ -96,18 +96,26 @@ display:inline-block;
 }
 `
 
-const Header = ({ userName, isLogin }) => {
+const Header = () => {
     //기본 설정
-    userName = '가나다'
-    isLogin = false
+    // userName = '가나다'
+    // isLogin = false
 
-    const [isLoginModal, setIsLoginModal] = useState(<LoginModal />)
+    const [isLoginModal, setIsLoginModal] = useState()
     const [modalOpen, setModalOpen] = useState(false)
+    const [isLogin, setIsLogin] = useState(false);
+    const [userName, setUserName] = useState('가나다');
 
+    useEffect(() => {
+        setModalOpen(!modalOpen)
+    }, [isLogin]);
 
     //로그인 되어있을 시 LogoutModal 로그아웃 되어있을 시 LoginModal
     const LoginModalClick = () => {
-        isLogin ? setIsLoginModal(<LogoutModal setModalOpen={setModalOpen} />) : setIsLoginModal(<LoginModal setModalOpen={setModalOpen} />)
+        isLogin ?
+            setIsLoginModal(<LogoutModal setModalOpen={setModalOpen} setIsLogin={setIsLogin} />)
+            : setIsLoginModal(<LoginModal setModalOpen={setModalOpen} setIsLogin={setIsLogin} setUserName={setUserName} />)
+
         setModalOpen(!modalOpen)
     }
     return (
