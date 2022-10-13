@@ -7,7 +7,7 @@ import { ReactComponent as LinkIcon } from './../assets/img/link_icon.svg';
 import { ReactComponent as HeartIcon } from './../assets/img/heart_icon.svg';
 import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg';
 
-import { confirm } from './../components/popup/confirm'
+import { confirm } from './../components/popup/confirm';
 
 // 스타일 컴포넌트와 본문을 분리할까? > 회의 때 정하기
 
@@ -37,6 +37,7 @@ const Profile = styled.div`
 const NameSpace = styled.div`
   display: flex;
   flex-direction: column;
+  width: 210px;
   .name {
     font-size: 15px;
     font-weight: 500;
@@ -52,12 +53,13 @@ const NameSpace = styled.div`
 const BookMarkContianer = styled.span`
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: 40px;
   margin: 2px 2px 0 0;
 `;
 
 const Contents = styled.div`
   margin: 16px 0 9px 7px;
+  line-height: 150%;
 `;
 
 const Bottom = styled.div`
@@ -80,12 +82,12 @@ const Number = styled.span`
 `;
 
 const LinkIconA = styled.a`
-display: block;
-height: 13px;
-width: 13px;
-background-position: 100% 100%;
-background-repeat: no-repeat;
-`
+  display: block;
+  height: 13px;
+  width: 13px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+`;
 
 export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
   // 컴포넌트 사용 예제
@@ -100,31 +102,53 @@ export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
   // -------------------
 
   //미완성 http 가 있으면 slice 후 a 태그로 감싸고 싶음
-  // link 생성은 완료했는데 앞  string 하고 합치면 [object Object] 로 변경되는 현상 발생 
-  // console.log(contents)
-  const contentLink = () => {
-    if (contents.indexOf('http') !== -1) {
-      let topContents = contents.slice(0, contents.indexOf('http'))
-      let linkContent = contents.slice(contents.indexOf('http'))
-      console.log(topContents)
+  // link 생성은 완료했는데 앞  string 하고 합치면 [object Object] 로 변경되는 현상 발생
+  // const contentLink = () => {
+  //   if (contents.indexOf('http') !== -1) {
+  //     let topContents = contents.slice(0, contents.indexOf('http'));
+  //     let linkContent = contents.slice(contents.indexOf('http'));
+  //     if (linkContent.indexOf(' ') !== -1) {
+  //       linkContent = linkContent.slice(0, linkContent.indexOf(' '));
+  //       let lastConents = linkContent.slice(linkContent.indexOf(' ') - 1);
+  //       let linkContentLink = { __html: linkContent };
+  //       return (contents = (
+  //         <>
+  //           {topContents}
+  //           <a
+  //             href={linkContent}
+  //             target='_blank'
+  //             rel='noopener noreferrer'
+  //             dangerouslySetInnerHTML={linkContentLink}
+  //           />
+  //           {lastConents}
+  //         </>
+  //       ));
+  //     } else {
+  //       let linkContentLink = { __html: linkContent };
+  //       return (contents = (
+  //         <>
+  //           {topContents}
+  //           <a
+  //             href={linkContent}
+  //             target='_blank'
+  //             rel='noopener noreferrer'
+  //             dangerouslySetInnerHTML={linkContentLink}
+  //           />
+  //         </>
+  //       ));
+  //     }
+  //   }
+  // };
 
-      if (linkContent.indexOf(' ') !== -1) {
-        linkContent = linkContent.slice(0, linkContent.indexOf(' '))
-        let lastConents = linkContent.slice(linkContent.indexOf(' ') - 1)
-        let linkContentLink = { __html: linkContent }
-        return contents = < a href={linkContent} target="_blank"
-          rel="noopener noreferrer" dangerouslySetInnerHTML={linkContentLink} />
-      }
-      else {
-        let linkContentLink = { __html: linkContent }
-        return contents = topContents + < a href={linkContent} target="_blank"
-          rel="noopener noreferrer" dangerouslySetInnerHTML={linkContentLink} />
-      }
-
-    }
-
-  }
-  // contentLink()
+  // const urlRegex = /(https?:\/\/[^\s]+)/g;
+  // contents = contents.replace(urlRegex, (url) => {
+  //   return (
+  //     <Link href={url} target='_blank' rel='noopener noreferrer'>
+  //       {url}
+  //     </Link>
+  //   );
+  // });
+  // console.log('1', contents);
 
   return (
     <Box>
@@ -134,16 +158,20 @@ export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
           <span className='name'>{name}</span>
           <span className='id'>@{id}</span>
         </NameSpace>
-        <BookMarkContianer onClick={() => confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')}>
+        <BookMarkContianer
+          onClick={() =>
+            confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+          }
+        >
           <BookmarkEmpty />
         </BookMarkContianer>
       </Header>
       <Contents>{contents}</Contents>
       <Bottom>
         <IconContainer>
-          <LinkIconA href={link} target="_blank"
-            rel="noopener noreferrer"> <LinkIcon /> </LinkIconA>
-
+          <LinkIconA href={link} target='_blank' rel='noopener noreferrer'>
+            <LinkIcon />
+          </LinkIconA>
         </IconContainer>
         <IconContainer>
           <RetweetIcon />

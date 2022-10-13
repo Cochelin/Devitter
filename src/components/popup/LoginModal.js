@@ -33,7 +33,10 @@ const LoginWrap = styled.button`
     background-color: transparent;
     border-bottom: 1px solid var( --dark-gray-color);
     width: 100%;
+    cursor: pointer;
     & p {
+        width: 100%;
+        text-align: left;
         font-size: 15px;
         line-height: 1.5;
         padding : 15px 0;
