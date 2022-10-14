@@ -6,6 +6,9 @@ const CategoryBox = styled.aside`
   min-width: 280px;
   height: 940px;
   padding: 48px;
+  position: fixed;
+  top: 142px;
+  left: 0;
 `;
 
 const Category = () => {
