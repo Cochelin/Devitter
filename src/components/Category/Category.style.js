@@ -26,7 +26,9 @@ export const Summary = styled.summary`
   font-size: 16px;
   font-weight: 700;
   line-height: 120%;
-  color: ${(props) => props.color};
+  > .green {
+    color: var(--point-green-color);
+  }
 `;
 
 // TODO: open/close animation 수정 필요(text, arrow)
@@ -41,7 +43,12 @@ export const ContentBox = styled.div`
 export const Content = styled.div`
   font-size: 15px;
   > div {
-    margin: 5px 2px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 2px;
+  }
+  .green {
+    color: var(--point-green-color);
   }
 `;
 
