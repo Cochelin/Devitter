@@ -91,7 +91,15 @@ const LinkIconA = styled.a`
   background-repeat: no-repeat;
 `;
 
-export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
+export const Tweet = ({
+  profile,
+  name,
+  id,
+  contents,
+  retweet,
+  likes,
+  link,
+}) => {
   const [copy, setCopy] = useState(false);
   // 컴포넌트 사용 예제
   // profile은 img src에 들어갈 내용이며, 추후 api 문서 업데이트 시 수정될 예정입니다.

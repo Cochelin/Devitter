@@ -15,7 +15,7 @@ import {
 } from '../static/dummyData';
 
 import Category from './../components/Category/Category';
-import { Twit } from '../components/Tweet';
+import { Tweet } from './../components/Tweet';
 
 const Section = styled.section`
   display: flex;
@@ -180,7 +180,7 @@ const Home = () => {
         <TwitContainer>
           {nowData.map((tweet, idx) => {
             return (
-              <Twit
+              <Tweet
                 profile={gradientMap()[idx]}
                 name={tweet.value3}
                 key={idx}
