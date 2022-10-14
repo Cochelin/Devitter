@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -19,12 +19,15 @@ import { Tweet } from './../components/Tweet';
 
 const Section = styled.section`
   display: flex;
+  padding-top: 142px;
   flex-direction: row;
 `;
 
 const Article = styled.article`
   display: flex;
+  width: 100%;
   flex-direction: column;
+  padding-left: 280px;
 `;
 
 const ArticleInfo = styled.div`
@@ -45,9 +48,10 @@ const ArticleInfo = styled.div`
 `;
 
 const TwitContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+  grid-auto-flow: dense;
+  grid-auto-rows: 200;
 `;
 
 const Home = () => {
@@ -169,6 +173,29 @@ const Home = () => {
     return gradientarr;
   };
 
+  const twitContainer = useRef();
+
+  useEffect(() => {
+    function resizeGridItem(item) {
+      let rowGap = 20;
+
+      let rowSpan = Math.ceil(
+        (item.getBoundingClientRect().height + rowGap) / rowGap
+      );
+      item.style.gridRowEnd = 'span ' + rowSpan;
+    }
+
+    function resizeAllGridItems() {
+      let allItems = twitContainer.current.children;
+      for (let x = 0; x < allItems.length; x++) {
+        resizeGridItem(allItems[x]);
+      }
+    }
+
+    window.onload = resizeAllGridItems();
+    window.addEventListener('resize', resizeAllGridItems);
+  });
+
   return (
     <Section>
       <Category nowCategory={nowCategory} setNowCategory={setNowCategory} />
@@ -177,7 +204,7 @@ const Home = () => {
           <div className='route'>전체 / 인기트윗</div>
           <div className='category'>인기트윗</div>
         </ArticleInfo>
-        <TwitContainer>
+        <TwitContainer ref={twitContainer}>
           {nowData.map((tweet, idx) => {
             return (
               <Tweet

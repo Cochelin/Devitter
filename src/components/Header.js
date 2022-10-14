@@ -11,8 +11,11 @@ import LogoutModal from './popup/LogoutModal';
 
 const Container = styled.div`
     display: table;
-
+    position: fixed;
+    top: 0;
+    left: 0;
     box-sizing : border-box;
+    background-color: var(--background-color);
     padding : 0 48px 0 48px;
     width : 100%;
     @media screen and (max-width: 850px) {

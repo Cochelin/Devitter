@@ -6,14 +6,14 @@ const Accordion = (props) => {
   let { summary, children, nowCategory, setNowCategory, open, toggle } = props;
   // const [highCategory, setHighCategory] = useState('인기트윗');
 
-  // const handleClick = (e) => {
-  //   setNowCategory(e.target.innerText);
-  //   toggle(e.target.innerText);
-  //   console.log(e.target.innerText);
-  //   if (summary === '인기트윗') {
-  //     setHighCategory(summary);
-  //   }
-  // };
+  const handleClick = (e) => {
+    setNowCategory(e.target.innerText);
+    toggle(e.target.innerText);
+    console.log(children);
+    // if (summary === '인기트윗') {
+    //   setHighCategory(summary);
+    // }
+  };
 
   // const handleContent = (e) => {
   //   if (e.target.innerText.split('\n').length > 1) return;
@@ -42,7 +42,7 @@ const Accordion = (props) => {
       }
     >
       <A.Detail>
-        <A.Summary>
+        <A.Summary onClick={handleClick}>
           <span className={open ? 'green' : null}>{summary}</span>
           {summary === '인기트윗' ? (
             <></>

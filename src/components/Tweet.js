@@ -17,6 +17,7 @@ const Box = styled.div`
   margin: 20px;
   min-width: 350px;
   max-width: 350px;
+  grid-column-end: span 3;
   height: max-content;
   border-radius: 24px;
   padding: 13px;
@@ -57,6 +58,7 @@ const BookMarkContianer = styled.span`
   justify-content: flex-end;
   width: 40px;
   margin: 2px 2px 0 0;
+  cursor: pointer;
 `;
 
 const Contents = styled.div`
