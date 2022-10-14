@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { ReactComponent as BookmarkEmpty } from './../assets/img/bookMarker_empty.svg';
 import { ReactComponent as LinkIcon } from './../assets/img/link_icon.svg';
 import { ReactComponent as HeartIcon } from './../assets/img/heart_icon.svg';
 import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg';
 
-import { confirm } from './popup/confirm';
-import Floating from './popup/Floating';
+import { confirm } from './../components/popup/confirm';
 
 // 스타일 컴포넌트와 본문을 분리할까? > 회의 때 정하기
 
@@ -92,7 +90,6 @@ const LinkIconA = styled.a`
 `;
 
 export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
-  const [copy, setCopy] = useState(false);
   // 컴포넌트 사용 예제
   // profile은 img src에 들어갈 내용이며, 추후 api 문서 업데이트 시 수정될 예정입니다.
   // -------------------
@@ -153,14 +150,6 @@ export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
   // });
   // console.log('1', contents);
 
-  useEffect(() => {
-    if (copy) {
-      setTimeout(() => {
-        setCopy(false);
-      }, 2000);
-    }
-  }, [copy]);
-
   return (
     <Box>
       <Header>
@@ -177,14 +166,7 @@ export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
           <BookmarkEmpty />
         </BookMarkContianer>
       </Header>
-      <CopyToClipboard
-        text={contents}
-        onCopy={() => {
-          setCopy(true);
-        }}
-      >
-        <Contents>{contents}</Contents>
-      </CopyToClipboard>
+      <Contents>{contents}</Contents>
       <Bottom>
         <IconContainer>
           <LinkIconA href={link} target='_blank' rel='noopener noreferrer'>
@@ -200,7 +182,6 @@ export const Twit = ({ profile, name, id, contents, retweet, likes, link }) => {
           <Number>{likes}</Number>
         </IconContainer>
       </Bottom>
-      {copy ? <Floating /> : <></>}
     </Box>
   );
 };
