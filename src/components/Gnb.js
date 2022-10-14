@@ -9,6 +9,8 @@ import { confirm } from './../components/popup/confirm'
 
 const Container = styled.div`
     display: table;
+    position: fixed;
+    top: 80px;
     background-color: var(--light-gray-color);
     box-sizing : border-box;
     padding : 0 48px 0 48px;
