@@ -56,6 +56,7 @@ const BookMarkContianer = styled.span`
   justify-content: flex-end;
   width: 40px;
   margin: 2px 2px 0 0;
+  cursor: pointer;
 `;
 
 const Contents = styled.div`

@@ -122,14 +122,11 @@ const Home = () => {
   const twitContainer = useRef()
 
   useEffect(() => {
-    console.log(twitContainer.current)
-    console.log(twitContainer.current.children[1])
     function resizeGridItem(item) {
       let rowGap = 20;
 
       let rowSpan = Math.ceil((item.getBoundingClientRect().height + rowGap) / rowGap);
       item.style.gridRowEnd = "span " + rowSpan;
-      console.log(item.getBoundingClientRect().height)
     }
 
     function resizeAllGridItems() {
@@ -139,43 +136,11 @@ const Home = () => {
       }
     }
 
-
-
     window.onload = resizeAllGridItems();
     window.addEventListener("resize", resizeAllGridItems);
 
-
-
   })
 
-  // useEffect(() => {
-  //   function resizeGridItem(item) {
-  //     const grid = twitContainer.current
-  //     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-  //     const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-  //     const rowSpan = Math.ceil((item.twitCompo.current.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-  //     item.style.gridRowEnd = "span " + rowSpan;
-  //   }
-
-  //   function resizeAllGridItems() {
-  //     const allItems = twitCompo.current;
-  //     for (let x = 0; x < allItems.length; x++) {
-  //       resizeGridItem(allItems[x]);
-  //     }
-  //   }
-
-  //   function resizeInstance(instance) {
-  //     const item = instance.elements[0];
-  //     resizeGridItem(item);
-  //   }
-
-  //   window.onload = resizeAllGridItems();
-  //   window.addEventListener("resize", resizeAllGridItems);
-
-  //   console.log(twitCompo.current)
-  //   console.log(twitContainer.current)
-
-  // }, [twitCompo.current])
 
 
   return (
