@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Accordion from './Accordion';
 
@@ -11,7 +11,9 @@ const CategoryBox = styled.aside`
   left: 0;
 `;
 
-const Category = () => {
+// props drilling TT
+const Category = ({ nowCategory, setNowCategory }) => {
+  const [openkey, setOpenkey] = useState('');
   const menu = [
     {
       인기트윗: [],
@@ -27,15 +29,27 @@ const Category = () => {
     },
   ];
 
+  const handleAccordian = (key) => {
+    console.log(key + '클릭!');
+    setOpenkey(openkey !== key ? key : null);
+    console.log(key, openkey);
+  };
+
   return (
     <CategoryBox>
       {menu.map((el, idx) => {
         const key = Object.keys(el);
         const value = Object.values(el);
         return (
-          <>
-            <Accordion summary={key}>{value}</Accordion>
-          </>
+          <Accordion
+            nowCategory={nowCategory}
+            setNowCategory={setNowCategory}
+            summary={key[0]}
+            toggle={handleAccordian}
+            open={openkey === key[0]}
+          >
+            {value[0]}
+          </Accordion>
         );
       })}
     </CategoryBox>
