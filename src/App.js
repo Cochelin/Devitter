@@ -13,9 +13,7 @@ function App() {
       <Header />
       <Gnb />
       <Routes>
-        <Route path='/' element={<Home />}>
-          {' '}
-        </Route>
+        <Route path='/' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
