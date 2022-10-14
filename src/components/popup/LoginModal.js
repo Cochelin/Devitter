@@ -47,6 +47,24 @@ const LoginWrap = styled.button`
   &:last-child {
     border-bottom: none;
   }
+  & button {
+        box-shadow: none !important;
+        width: 100% !important;
+    }
+    & button div {
+        display: flex;
+        align-items: center;
+    }
+    & button div svg {
+       transform: scale(0.8);
+    }
+    & button span {
+        width: 100% !important;
+        font-size: 13px !important;
+        font-weight: 400!important;
+        text-align: left !important;
+        font-family: "IBMPlexSansKR-Medium", Arial, Helvetica, sans-serif !important;
+    }
 `;
 const TwitterImg = styled.img`
   width: 14px;
@@ -61,41 +79,41 @@ const GoogleImg = styled.img`
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 let data = '';
 const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: CLIENT_ID,
-        scope: 'profile',
-      });
+    useEffect(() => {
+        function start() {
+            gapi.client.init({
+                clientId: CLIENT_ID,
+                scope: 'profile',
+            });
+        }
+        gapi.load('client:auth2', start);
+    });
+    if (gapi.auth) {
+        // 토큰 저장
+        let googleAccessToken = gapi.auth.getToken().access_token;
+        sessionStorage.setItem('google_access_token', googleAccessToken);
+        // console.log(sessionStorage.getItem('google_access_token'));
     }
-    gapi.load('client:auth2', start);
-  });
-  if (gapi.auth) {
-    // 토큰 저장
-    let googleAccessToken = gapi.auth.getToken().access_token;
-    sessionStorage.setItem('google_access_token', googleAccessToken);
-    // console.log(sessionStorage.getItem('google_access_token'));
-  }
 
-  const onGoogleLoginSuccess = (res) => {
-    let name = res.profileObj.name;
-    // alert(`로그인되었습니다. ${name}님 안녕하세요.`);
-    //isLogin 상태 변경
-    setIsLogin(true);
-    setUserName(name);
-  };
+    const onGoogleLoginSuccess = (res) => {
+        let name = res.profileObj.name;
+        // alert(`로그인되었습니다. ${name}님 안녕하세요.`);
+        //isLogin 상태 변경
+        setIsLogin(true);
+        setUserName(name);
+    };
 
-  const onGoogleLogInFailure = (res) => {
-    alert('로그인 실패:', res);
-  };
+    const onGoogleLogInFailure = (res) => {
+        alert('로그인 실패:', res);
+    };
 
-  return (
-    <ModalWrap>
-      <Close onClick={() => setModalOpen(false)}>
-        <img src={iconClose} alt='close Button' />
-      </Close>
+    return (
+        <ModalWrap>
+            <Close onClick={() => setModalOpen(false)}>
+                <img src={iconClose} alt='close Button' />
+            </Close>
 
-      {/*
+            {/*
             <LoginWrap>
                 <TwitterImg src={iconTwitter} />
                 <p>트위터 로그인</p>
@@ -110,21 +128,21 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
             </LoginWrap>
             */}
 
-      <LoginWrap type='button'>
-        <GoogleLogin
-          client_id={CLIENT_ID}
-          buttonText='로그인'
-          onSuccess={onGoogleLoginSuccess}
-          onFailure={onGoogleLogInFailure}
-          cookiePolicy={'single_host_orgin'}
-          isSignedIn={true}
-        />
+            <LoginWrap type='button'>
+                <GoogleLogin
+                    client_id={CLIENT_ID}
+                    buttonText='로그인'
+                    onSuccess={onGoogleLoginSuccess}
+                    onFailure={onGoogleLogInFailure}
+                    cookiePolicy={'single_host_orgin'}
+                    isSignedIn={true}
+                />
 
-        {/* <GoogleImg src={iconGoogle} />
+                {/* <GoogleImg src={iconGoogle} />
                 <p>구글 로그인</p> */}
-      </LoginWrap>
-    </ModalWrap>
-  );
+            </LoginWrap>
+        </ModalWrap>
+    );
 };
 
 export default LoginModal;
