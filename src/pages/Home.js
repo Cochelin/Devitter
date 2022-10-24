@@ -1,132 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import * as Styled from './Home.style'
+import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
 
-import {
-  javascriptData,
-  reactData,
-  vueData,
-  cssData,
-  cssDataEng,
-  htmlData,
-  htmlDataEng,
-  springData,
-  javaData,
-  pythonData,
-} from '../static/dummyData';
 
 import Category from './../components/Category/Category';
 import { Tweet } from './../components/Tweet';
 
-const Section = styled.section`
-  display: flex;
-  padding-top: 142px;
-  flex-direction: row;
-`;
-
-const Article = styled.article`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding-left: 280px;
-`;
-
-const ArticleInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 60px;
-  margin: 40px 0 0 32px;
-  .route {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 28px;
-  }
-  .category {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 33px;
-  }
-`;
-
-const TwitContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-  grid-auto-flow: dense;
-  grid-auto-rows: 200;
-`;
 
 const Home = () => {
-  //dummy
 
-
-  const badWords = [
-    '지랄',
-    '시발',
-    '씨발',
-    '존나',
-    '미쳐',
-    '미친',
-    '미쳤',
-    '개새',
-    'fuck',
-    '。',
-    '개웃',
-
-  ];
-  let htmlAndCssDummy = [
-    ...htmlData,
-    ...htmlDataEng,
-    ...cssData,
-    ...cssDataEng,
-  ]
-
-  let javascriptDummy = [...javascriptData]
-  let reactDummy = [...reactData]
-  let vueDummy = [...vueData]
-  let springDummy = [...springData]
-  let javaDummy = [...javaData]
-  let pythonDummy = [...pythonData]
-  for (let i = 0; i < badWords.length; i++) {
-    javascriptDummy = javascriptDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-    reactDummy = reactDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-    htmlAndCssDummy = htmlAndCssDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-    vueDummy = vueDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-    springDummy = springDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-    javaDummy = javaDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-    pythonDummy = pythonDummy.filter(
-      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
-    );
-  }
-
-  const allDummy = [
-    ...javascriptDummy,
-    ...reactDummy,
-    ...vueDummy,
-    ...htmlAndCssDummy,
-    ...springDummy,
-    ...javaDummy,
-    ...pythonDummy,
-  ];
-  const descAllDummy = [...allDummy].sort((a, b) => b.value6 - a.value6);
-
-  // 내림차순 정렬
-  // const LikesDesc = () => {
-  //   allDummy = allDummy.sort((a,b) => b.value7 - a.value7)
-  // }
-
-  // 날짜별 정렬 (완료안됨)
-  const TodayDummy = [...allDummy].sort((a, b) => b.value9 - a.value9);
 
   //category 클릭시 useState update
   const [nowData, setNowData] = useState(descAllDummy);
@@ -191,17 +74,17 @@ const Home = () => {
 
     window.onload = resizeAllGridItems();
     window.addEventListener('resize', resizeAllGridItems);
-  });
+  }, []);
 
   return (
-    <Section>
+    <Styled.Section>
       <Category nowCategory={nowCategory} setNowCategory={setNowCategory} />
-      <Article>
-        <ArticleInfo>
+      <Styled.Article>
+        <Styled.ArticleInfo>
           <div className='route'>전체 / 인기트윗</div>
           <div className='category'>인기트윗</div>
-        </ArticleInfo>
-        <TwitContainer ref={twitContainer}>
+        </Styled.ArticleInfo>
+        <Styled.TwitContainer ref={twitContainer}>
           {nowData.map((tweet, idx) => {
             return (
               <Tweet
@@ -216,9 +99,9 @@ const Home = () => {
               />
             );
           })}
-        </TwitContainer>
-      </Article>
-    </Section>
+        </Styled.TwitContainer>
+      </Styled.Article>
+    </Styled.Section>
   );
 };
 
