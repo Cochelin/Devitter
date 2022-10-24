@@ -126,8 +126,8 @@ const Gnb = () => {
                     </Link>
                 </ListClickArea>
                 <ListClickArea>
-                    <Link to='/' onClick={() => confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')} className={nowTab === 'bookmark' ? 'active' : null}>
-
+                    <Link to='/BookMark' onClick={() => setNowTab('bookmark')} className={nowTab === 'bookmark' ? 'active' : null}>
+                        {/* onClick={() => confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')} */}
                         북마크
                         {nowTab === 'bookmark' ?
                             <img className="BookMarker" src={BookMarkerAcive} /> :
