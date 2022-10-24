@@ -56,62 +56,59 @@ const TwitContainer = styled.div`
 
 const Home = () => {
   //dummy
-  let javascriptDummy = javascriptData.filter(
-    (el) => el.value6 > 20 || el.value7 > 80
-  );
-  let reactDummy = reactData.filter((el) => el.value6 > 20 || el.value7 > 80);
-  let vueDummy = vueData.filter((el) => el.value6 > 20 || el.value7 > 80);
-  let cssEngData = cssDataEng.filter((el) => el.value6 > 20 || el.value7 > 80);
-  let cssDummy = [
-    ...cssData.filter((el) => el.value6 > 20 || el.value7 > 80),
-    ...cssEngData,
+
+
+  const badWords = [
+    '지랄',
+    '시발',
+    '씨발',
+    '존나',
+    '미쳐',
+    '미친',
+    '미쳤',
+    '개새',
+    'fuck',
+    '。',
+    '개웃',
+
   ];
-  let htmlEngData = htmlDataEng.filter(
-    (el) => el.value6 > 20 || el.value7 > 80
-  );
   let htmlAndCssDummy = [
-    ...htmlData.filter((el) => el.value6 > 20 || el.value7 > 80),
-    ...htmlEngData,
-    ...cssDummy,
-  ];
-  let springDummy = springData.filter((el) => el.value6 > 20 || el.value7 > 80);
-  let javaDummy = javaData.filter((el) => el.value6 > 20 || el.value7 > 80);
-  let pythonDummy = pythonData.filter((el) => el.value6 > 20 || el.value7 > 80);
-  const FilterString = () => {
-    const badWords = [
-      '지랄',
-      '시발',
-      '씨발',
-      '존나',
-      '미쳐',
-      '미친',
-      '미쳤',
-      '개새',
-      'fuck',
-      '。',
-    ];
-    for (let i = 0; i < badWords.length; i++) {
-      javascriptDummy = javascriptDummy.filter(
-        (el) => el.value5.indexOf(badWords[i]) === -1
-      );
-      reactDummy = reactDummy.filter(
-        (el) => el.value5.indexOf(badWords[i]) === -1
-      );
-      htmlAndCssDummy = htmlAndCssDummy.filter(
-        (el) => el.value5.indexOf(badWords[i]) === -1
-      );
-      springDummy = springDummy.filter(
-        (el) => el.value5.indexOf(badWords[i]) === -1
-      );
-      javaDummy = javaDummy.filter(
-        (el) => el.value5.indexOf(badWords[i]) === -1
-      );
-      pythonDummy = pythonDummy.filter(
-        (el) => el.value5.indexOf(badWords[i]) === -1
-      );
-    }
-  };
-  FilterString();
+    ...htmlData,
+    ...htmlDataEng,
+    ...cssData,
+    ...cssDataEng,
+  ]
+
+  let javascriptDummy = [...javascriptData]
+  let reactDummy = [...reactData]
+  let vueDummy = [...vueData]
+  let springDummy = [...springData]
+  let javaDummy = [...javaData]
+  let pythonDummy = [...pythonData]
+  for (let i = 0; i < badWords.length; i++) {
+    javascriptDummy = javascriptDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+    reactDummy = reactDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+    htmlAndCssDummy = htmlAndCssDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+    vueDummy = vueDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+    springDummy = springDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+    javaDummy = javaDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+    pythonDummy = pythonDummy.filter(
+      (el) => el.value5.indexOf(badWords[i]) === -1 && (el.value6 > 20 || el.value7 > 80)
+    );
+  }
+
   const allDummy = [
     ...javascriptDummy,
     ...reactDummy,
@@ -143,24 +140,24 @@ const Home = () => {
       l = 100;
     return num === 1
       ? 'rgba(' +
-          o(r() * s) +
-          ',' +
-          o(r() * s) +
-          ',' +
-          o(r() * s) +
-          ',' +
-          1 +
-          ')'
+      o(r() * s) +
+      ',' +
+      o(r() * s) +
+      ',' +
+      o(r() * s) +
+      ',' +
+      1 +
+      ')'
       : 'rgba(' +
-          o(r() * s) +
-          ',' +
-          o(r() * (s - l)) +
-          l +
-          ',' +
-          o(r() * s) +
-          ',' +
-          0.3 +
-          ')';
+      o(r() * s) +
+      ',' +
+      o(r() * (s - l)) +
+      l +
+      ',' +
+      o(r() * s) +
+      ',' +
+      0.3 +
+      ')';
   };
   const gradientMap = () => {
     const gradientarr = [];
