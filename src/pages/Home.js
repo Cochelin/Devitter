@@ -167,7 +167,7 @@ const Home = () => {
     const gradient = `linear-gradient(180deg, ${random_rgba(
       1
     )} 0%, ${random_rgba(2)} 100%);`;
-    for (let j = 0; j < nowCategory.length; j++) {
+    for (let j = 0; j < nowData.length; j++) {
       gradientarr.push(gradient);
     }
     return gradientarr;
