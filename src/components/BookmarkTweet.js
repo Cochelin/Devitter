@@ -25,12 +25,12 @@ box-shadow: 0px 4px 11px 0px rgba(0, 0, 0, 0.2);
 
 const BookmarkTweet = ({ profile, name, id, contents, link, retweet, likes }) => {
 
-    profile = 'black'
-    name = '이름이름'
-    id = 'idid'
-    contents = '트윗컴포넌트 연습용입니다.트윗컴포넌트 연습용입니다.트윗컴포넌트 연습용입니다.트윗컴포넌트 연습용입니다.'
-    retweet = 25
-    likes = 25
+    // profile = 'black'
+    // name = '이름이름'
+    // id = 'idid'
+    // contents = '트윗컴포넌트 연습용입니다.트윗컴포넌트 연습용입니다.트윗컴포넌트 연습용입니다.트윗컴포넌트 연습용입니다.'
+    // retweet = 25
+    // likes = 25
 
 
     const [copy, setCopy] = useState(false);
