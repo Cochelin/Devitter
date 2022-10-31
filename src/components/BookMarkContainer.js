@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { BookMarkList } from './../atom/atoms'
 import styled from 'styled-components';
 import BookmarkTweet from './BookmarkTweet';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const TwitContainer = styled.div`
   display: grid;
@@ -33,13 +34,14 @@ margin: 40px 0 0 32px;
   line-height: 33px;
 }
 `;
-const BookMarkContainer = ({ mainId, subId }) => {
-
+const BookMarkContainer = ({ props }) => {
 
     //Dummy 이용 임시 아이디
 
-    mainId = 1
-    subId = 11
+    // mainId = 1
+    // subId = 11
+    let params = useParams();
+    console.log(params)
 
     const twitContainer = useRef();
     useEffect(() => {
@@ -66,8 +68,8 @@ const BookMarkContainer = ({ mainId, subId }) => {
 
     const bookmarkDummy = useRecoilValue(BookMarkList)
 
-    const filterBookMarkDummy = bookmarkDummy.filter(el => el.id === mainId)
-    const filtersubBookMarkDummy = filterBookMarkDummy[0].children.filter(el => el.id === subId)
+    const filterBookMarkDummy = bookmarkDummy.filter(el => el.id === +params.mainId)
+    const filtersubBookMarkDummy = filterBookMarkDummy[0].children.filter(el => el.id === +params.subId)
     console.log(filtersubBookMarkDummy[0].children)
 
     //profile img
@@ -107,6 +109,7 @@ const BookMarkContainer = ({ mainId, subId }) => {
         }
         return gradientarr;
     };
+
 
     return (
         <Article>

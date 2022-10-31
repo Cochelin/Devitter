@@ -15,11 +15,12 @@ const BookmarkList = () => {
 
             {
                 bookmarkDummy.map((el, idx) => {
+                    const mainId = el.id
                     return (<Ul>{el.name}
                         <Li>
                             {
                                 el.children.map((el) => {
-                                    return <Li><Link to={`${el.id}`}>{el.name}</Link></Li>
+                                    return <Li><Link to={`${mainId}/${el.id}`}>{el.name}</Link></Li>
                                 })
                             }
 

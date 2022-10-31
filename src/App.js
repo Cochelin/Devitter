@@ -6,6 +6,7 @@ import Header from './components/Header';
 import './style/common.css';
 import LoadingPage from './components/Loading/LoadingPage';
 import Bookmark from './pages/Bookmark';
+import BookMarkContainer from './components/BookMarkContainer';
 
 function App() {
   return (
@@ -15,7 +16,10 @@ function App() {
       <Gnb />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/Bookmark' element={<Bookmark />} />
+        <Route path="/" element={<Navigate replace to="/" />} />
+        <Route path='/Bookmark' element={<Bookmark />} >
+          <Route path=":mainId/:subId" element={<BookMarkContainer />} />
+        </Route>
 
         {/* <Route path='/' element={<Navigate to='/' />} /> */}
       </Routes>
