@@ -88,17 +88,15 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
         }
         gapi.load('client:auth2', start);
     });
-    if (gapi.auth) {
-        // 토큰 저장
-        let googleAccessToken = gapi.auth.getToken().access_token;
-        sessionStorage.setItem('google_access_token', googleAccessToken);
-        // console.log(sessionStorage.getItem('google_access_token'));
-    }
+    // if (gapi.auth) {
+    //     // 토큰 저장
+    //     let googleAccessToken = gapi.auth.getToken().access_token;
+    //     sessionStorage.setItem('google_access_token', googleAccessToken);
+    //     // console.log(sessionStorage.getItem('google_access_token'));
+    // }
 
     const onGoogleLoginSuccess = (res) => {
         let name = res.profileObj.name;
-        // alert(`로그인되었습니다. ${name}님 안녕하세요.`);
-        //isLogin 상태 변경
         setIsLogin(true);
         setUserName(name);
     };
@@ -113,21 +111,6 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
                 <img src={iconClose} alt='close Button' />
             </Close>
 
-            {/*
-            <LoginWrap>
-                <TwitterImg src={iconTwitter} />
-                <p>트위터 로그인</p>
-            </LoginWrap>
-
-            <LoginWrap >
-                <div id="naver_id_login"><NaverLogin /></div>
-
-                <NaverLogout />
-                <GithubImg id="naverIdLogin" src={iconGithub} />
-                <p>네이버 로그인</p>
-            </LoginWrap>
-            */}
-
             <LoginWrap type='button'>
                 <GoogleLogin
                     client_id={CLIENT_ID}
@@ -137,9 +120,6 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
                     cookiePolicy={'single_host_orgin'}
                     isSignedIn={true}
                 />
-
-                {/* <GoogleImg src={iconGoogle} />
-                <p>구글 로그인</p> */}
             </LoginWrap>
         </ModalWrap>
     );
