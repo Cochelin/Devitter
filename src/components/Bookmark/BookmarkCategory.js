@@ -12,9 +12,17 @@ const Header = styled.div`
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 22px 0;
+padding: 22px 0 ;
+border-bottom: 1px solid var(--dark-gray-color);
+
 & p {
     font-weight: 700;
+    font-size: 16px;
+}
+& button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 `
