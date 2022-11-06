@@ -7,15 +7,19 @@ import './style/common.css';
 import LoadingPage from './components/Loading/LoadingPage';
 import Bookmark from './pages/Bookmark';
 import BookMarkContainer from './components/BookMarkContainer';
+import TwittCompo from './pages/TwittCompo';
 
 function App() {
   return (
     <BrowserRouter>
-      <LoadingPage />
+      {/* <LoadingPage /> */}
       <Header />
       <Gnb />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home />} >
+          <Route path='/' element={<TwittCompo />} />
+          <Route path=':categoryName' element={<TwittCompo />} />
+        </Route>
         <Route path="/" element={<Navigate replace to="/" />} />
         <Route path='/Bookmark' element={<Bookmark />} >
           <Route path=":mainId/:subId" element={<BookMarkContainer />} />
