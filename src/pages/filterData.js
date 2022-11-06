@@ -85,4 +85,12 @@ const descAllDummy = [...allDummy].sort((a, b) => b.value6 - a.value6);
 const TodayDummy = [...allDummy].sort((a, b) => b.value9 - a.value9);
 
 
-export { descAllDummy, }
+export {
+    descAllDummy, javascriptDummy,
+    reactDummy,
+    vueDummy,
+    htmlAndCssDummy,
+    springDummy,
+    javaDummy,
+    pythonDummy
+}
