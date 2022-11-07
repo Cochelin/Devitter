@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 
 import * as A from './Category.style';
 
@@ -10,18 +10,11 @@ const Accordion = (props) => {
   const handleClick = (e) => {
     setNowCategory(e.target.innerText);
     toggle(e.target.innerText);
-    console.log(children);
     // if (summary === '인기트윗') {
     //   setHighCategory(summary);
     // }
   };
 
-  const navigate = useNavigate()
-  const ClickLocation = (e, el) => {
-
-    navigate(`/${el}`)
-    window.location.reload()
-  }
   // const handleContent = (e) => {
   //   if (e.target.innerText.split('\n').length > 1) return;
   //   const category = e.target.innerText;
@@ -47,11 +40,8 @@ const Accordion = (props) => {
     if (params.categoryName === 'Spring' || params.categoryName === 'Java' || params.categoryName === 'Python') { nowSummery = 'Back' }
     if (params.categoryName === undefined) { nowSummery = '인기트윗' }
 
-    console.log(nowSummery, summary)
-    console.log(nowSummery === summary)
     return nowSummery === summary
   }
-  console.log(`/${children[0]}`)
   return (
     <A.AccordionBox
       key={summary}
@@ -71,7 +61,7 @@ const Accordion = (props) => {
             <A.ArrowClose />
           )}
         </A.Summary>
-        <A.ContentBox shown={open} opacity={open ? 1 : 0}>
+        <A.ContentBox>
           <A.Content>
             {children.map((el) => {
               return (

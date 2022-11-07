@@ -4,6 +4,7 @@ export const AccordionBox = styled.div`
   border-top: ${(props) => (props.initial ? 0 : 1)}px solid #d6d6d6;
   width: 100%;
   height: ${(props) => props.height}px;
+  overflow: hidden;
   transition: height 0.3s;
   padding: 22px 0;
 `;
@@ -57,9 +58,9 @@ export const Summary = styled.summary`
 // TODO: open/close animation 수정 필요(text, arrow)
 export const ContentBox = styled.div`
   transition: opacity 0.3s;
-  visibility: ${(props) => (props.shown ? 'visible' : 'hidden')};
+  /* visibility: ${(props) => (props.shown ? 'visible' : 'hidden')}; */
   overflow: hidden;
-  opacity: ${(props) => props.opacity};
+  /* opacity: ${(props) => props.opacity}; */
   margin-top: 22px;
 `;
 

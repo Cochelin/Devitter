@@ -73,7 +73,7 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
     // nowData.length 를 useEffect nowData 가 변경될 때마다 그 값으로 정렬해주면 해결
     useEffect(() => {
         function resizeGridItem(item) {
-            let rowGap = 20;
+            let rowGap = 30;
 
             let rowSpan = Math.ceil(
                 (item.getBoundingClientRect().height + rowGap) / rowGap

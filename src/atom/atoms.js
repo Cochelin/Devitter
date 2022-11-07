@@ -5,3 +5,8 @@ export const BookMarkList = atom({
     key: 'bookmarkList',
     default: bookmarkList
 })
+
+export const IsLogin = atom({
+    key: 'IsLogin',
+    default: true
+})
