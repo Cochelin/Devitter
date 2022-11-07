@@ -5,7 +5,7 @@ import { confirm } from './popup/confirm';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Floating from './popup/Floating';
 
-import { ReactComponent as BookmarkEmpty } from './../assets/img/bookMarker_empty.svg';
+import { ReactComponent as Bookmark } from './../assets/img/bookMarker.svg';
 import { ReactComponent as LinkIcon } from './../assets/img/link_icon.svg';
 import { ReactComponent as HeartIcon } from './../assets/img/heart_icon.svg';
 import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg';
@@ -52,10 +52,10 @@ const BookmarkTweet = ({ profile, name, id, contents, link, retweet, likes }) =>
                 </Styled.NameSpace>
                 <Styled.BookMarkContianer
                     onClick={() =>
-                        confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+                        confirm('북마크를 해제하시겠습니까?', '북마크 해제', '취소')
                     }
                 >
-                    <BookmarkEmpty />
+                    <Bookmark />
                 </Styled.BookMarkContianer>
 
             </Styled.Header>

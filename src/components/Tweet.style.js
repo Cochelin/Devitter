@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import BookMarkActiveImg from './../assets/img/bookMarker.png'
 
 export const Box = styled.div`
 margin: 20px;
@@ -47,7 +48,21 @@ justify-content: flex-end;
 width: 20px;
 margin: 2px 2px 0 0;
 cursor: pointer;
+
 `;
+
+export const BackgroundSpan = styled.span`
+ font-size: 0;
+  background: url(${(props) => props.background}) ;
+  width: 20px;
+  height: 20px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  &.active {
+    background: url(${BookMarkActiveImg});
+  }
+`
 
 export const Contents = styled.div`
 margin: 16px 0 9px 7px;

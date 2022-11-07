@@ -4,13 +4,19 @@ import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import * as Styled from './Tweet.style'
 
+import { ReactComponent as Bookmark } from './../assets/img/bookMarker.svg';
 import { ReactComponent as BookmarkEmpty } from './../assets/img/bookMarker_empty.svg';
 import { ReactComponent as LinkIcon } from './../assets/img/link_icon.svg';
 import { ReactComponent as HeartIcon } from './../assets/img/heart_icon.svg';
 import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg';
 
+import BookMarkActiveImg from './../assets/img/bookMarker.png'
+import BookMarkImg from './../assets/img/bookMarkNone.png'
+
 import { confirm } from './popup/confirm';
 import Floating from './popup/Floating';
+import { IsLogin } from '../atom/atoms';
+import { useRecoilValue } from 'recoil';
 
 export const Tweet = ({
   profile,
@@ -82,6 +88,8 @@ export const Tweet = ({
   // });
   // console.log('1', contents);
 
+
+  const isLogin = useRecoilValue(IsLogin)
   useEffect(() => {
     if (copy) {
       setTimeout(() => {
@@ -89,6 +97,13 @@ export const Tweet = ({
       }, 2000);
     }
   }, [copy]);
+
+  //error 모든페이지에서 북마크 표시보임
+  const toggleItem = (e) => {
+    e.currentTarget.className += " active";
+    console.log(e.target)
+
+  }
 
   return (
     <Styled.Box>
@@ -99,11 +114,12 @@ export const Tweet = ({
           <span className='id'>@{id}</span>
         </Styled.NameSpace>
         <Styled.BookMarkContianer
-          onClick={() =>
-            confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
-          }
+
         >
-          <BookmarkEmpty />
+          <Styled.BackgroundSpan onClick={(e) =>
+            isLogin ? toggleItem(e) : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+          } props='props' background={`${BookMarkImg}`}>bookmark</Styled.BackgroundSpan>
+          {/* <BookmarkEmpty /> */}
         </Styled.BookMarkContianer>
       </Styled.Header>
       <CopyToClipboard
