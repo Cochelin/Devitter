@@ -48,6 +48,7 @@ const LogoutModal = ({ setModalOpen, setIsLogin }) => {
     const onGoogleLogoutSuccess = (res) => {
         setIsLogin(false);
         alert('성공적으로 로그아웃되었습니다');
+        sessionStorage.clear();
 
     }
     return (
@@ -59,6 +60,7 @@ const LogoutModal = ({ setModalOpen, setIsLogin }) => {
                     buttonText='로그아웃'
                     onLogoutSuccess={onGoogleLogoutSuccess}
                 />
+                
             </LoginWrap>
         </ModalWrap>
     );

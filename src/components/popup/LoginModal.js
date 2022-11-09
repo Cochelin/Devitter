@@ -88,17 +88,18 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
         }
         gapi.load('client:auth2', start);
     });
-    // if (gapi.auth) {
-    //     // 토큰 저장
-    //     let googleAccessToken = gapi.auth.getToken().access_token;
-    //     sessionStorage.setItem('google_access_token', googleAccessToken);
-    //     // console.log(sessionStorage.getItem('google_access_token'));
-    // }
+    
 
     const onGoogleLoginSuccess = (res) => {
-        let name = res.profileObj.name;
+      let name = res.profileObj.name;
+      console.log(res.profileObj)
         setIsLogin(true);
-        setUserName(name);
+      setUserName(name);
+      if (gapi.auth) {
+        let googleAccessToken = gapi.auth.getToken().access_token;
+        sessionStorage.setItem('access_token', googleAccessToken);// 토큰 저장
+        sessionStorage.setItem('email', res.profileObj.email);// 이메일 저장
+    }
     };
 
     const onGoogleLogInFailure = (res) => {
