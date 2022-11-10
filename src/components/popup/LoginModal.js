@@ -78,7 +78,7 @@ const GoogleImg = styled.img`
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 let data = '';
-const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
+const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => {
     useEffect(() => {
         function start() {
             gapi.client.init({
@@ -91,14 +91,17 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
     
 
     const onGoogleLoginSuccess = (res) => {
-      let name = res.profileObj.name;
-      console.log(res.profileObj)
-        setIsLogin(true);
-      setUserName(name);
       if (gapi.auth) {
         let googleAccessToken = gapi.auth.getToken().access_token;
         sessionStorage.setItem('access_token', googleAccessToken);// 토큰 저장
         sessionStorage.setItem('email', res.profileObj.email);// 이메일 저장
+
+
+      let name = res.profileObj.name;
+      console.log(res.profileObj)
+      setIsLogin(true);
+      setUserName(name);
+      // setUserImage(res.profileObj.imageUrl); // 프로필 이미지 설정
     }
     };
 

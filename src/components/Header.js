@@ -60,13 +60,15 @@ const LogoutBtn = styled.button`
   width: 48px;
   height: 48px;
   border: none;
-  padding: 10px;
+  /* padding: 10px; */
   background: linear-gradient(180deg, #62ff5f 0%, rgba(96, 70, 255, 0) 100%);
   border-radius: 30px;
   margin-left: 16px;
   cursor: pointer;
   & img {
     margin: 0 auto;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -94,6 +96,7 @@ const FlexWarp = styled.div`
 `;
 const UserSpan = styled.span`
   display: inline-block;
+  text-align: center;// 세로 가운데 정렬
   @media screen and (max-width: 850px) {
     display: none;
   }
@@ -108,6 +111,7 @@ const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [userName, setUserName] = useState('가나다');
+  const [userImage, setUserImage] = useState(ImgLogin);
 
   useEffect(() => {
     setModalOpen(!modalOpen);
@@ -123,7 +127,8 @@ const Header = () => {
           <LoginModal
             setModalOpen={setModalOpen}
             setIsLogin={setIsLogin}
-            setUserName={setUserName}
+          setUserName={setUserName}
+          setUserImage={setUserImage}
           />
         );
 
@@ -142,9 +147,9 @@ const Header = () => {
         {isLogin ? (
           <>
             <UserSpan>{userName}님</UserSpan>
-            <LogoutBtn onClick={LoginModalClick}>
+            <LogoutBtn onClick={LoginModalClick} src={userImage}>
               <FlexWarp>
-                <img src={ImgLogin}></img>
+                <img src={userImage} alt='user-profile'></img>
               </FlexWarp>
             </LogoutBtn>
           </>
