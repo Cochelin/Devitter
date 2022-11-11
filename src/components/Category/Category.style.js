@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const AccordionBox = styled.div`
   border-top: ${(props) => (props.initial ? 0 : 1)}px solid #d6d6d6;
   width: 100%;
   height: ${(props) => props.height}px;
+  overflow: hidden;
   transition: height 0.3s;
   padding: 22px 0;
 `;
@@ -29,14 +30,37 @@ export const Summary = styled.summary`
   > .green {
     color: var(--point-green-color);
   }
+
+  & a{
+    text-decoration: none;
+
+    ${(p) =>
+    p.active &&
+    css`
+     color: var(--point-green-color);
+     `
+  }
+  }
+  & a.active{
+    color: var(--point-green-color);
+  }
+
+  & span{
+    ${(p) =>
+    p.active &&
+    css`
+     color: var(--point-green-color);
+     `
+  }
+  }
 `;
 
 // TODO: open/close animation 수정 필요(text, arrow)
 export const ContentBox = styled.div`
   transition: opacity 0.3s;
-  visibility: ${(props) => (props.shown ? 'visible' : 'hidden')};
+  /* visibility: ${(props) => (props.shown ? 'visible' : 'hidden')}; */
   overflow: hidden;
-  opacity: ${(props) => props.opacity};
+  /* opacity: ${(props) => props.opacity}; */
   margin-top: 22px;
 `;
 
@@ -45,10 +69,17 @@ export const Content = styled.div`
   > div {
     display: flex;
     flex-direction: column;
-    margin: 10px 2px;
+    padding: 10px 2px;
   }
   .green {
     color: var(--point-green-color);
+  }
+
+  & a{
+    text-decoration: none;
+  }
+  & a.active{
+     color: var(--point-green-color);
   }
 `;
 

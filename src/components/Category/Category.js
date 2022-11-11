@@ -22,7 +22,7 @@ const Category = ({ nowCategory, setNowCategory }) => {
       'For Junior': ['취업', '블로깅'],
     },
     {
-      Front: ['JavaScript', 'React', 'Vue.js', 'HTML/CSS'],
+      Front: ['JavaScript', 'React', 'Vue.js', 'HTML&CSS'],
     },
     {
       Back: ['Spring', 'Java', 'Python'],

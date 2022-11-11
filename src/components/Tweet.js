@@ -2,96 +2,21 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import * as Styled from './Tweet.style'
 
+import { ReactComponent as Bookmark } from './../assets/img/bookMarker.svg';
 import { ReactComponent as BookmarkEmpty } from './../assets/img/bookMarker_empty.svg';
 import { ReactComponent as LinkIcon } from './../assets/img/link_icon.svg';
 import { ReactComponent as HeartIcon } from './../assets/img/heart_icon.svg';
 import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg';
 
+import BookMarkActiveImg from './../assets/img/bookMarker.png'
+import BookMarkImg from './../assets/img/bookMarkNone.png'
+
 import { confirm } from './popup/confirm';
 import Floating from './popup/Floating';
-
-// 스타일 컴포넌트와 본문을 분리할까? > 회의 때 정하기
-
-const Box = styled.div`
-  margin: 20px;
-  min-width: 350px;
-  max-width: 350px;
-  grid-column-end: span 3;
-  height: max-content;
-  border-radius: 24px;
-  padding: 13px;
-  box-shadow: 0px 4px 11px 0px rgba(0, 0, 0, 0.2);
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Profile = styled.div`
-  margin: 0 20px 0 3px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: ${(props) => props.background};
-`;
-
-const NameSpace = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 210px;
-  .name {
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 22.5px;
-  }
-  .id {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-  }
-`;
-
-const BookMarkContianer = styled.span`
-  display: flex;
-  justify-content: flex-end;
-  width: 40px;
-  margin: 2px 2px 0 0;
-  cursor: pointer;
-`;
-
-const Contents = styled.div`
-  margin: 16px 0 9px 7px;
-  line-height: 150%;
-`;
-
-const Bottom = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-right: 12px;
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 14px;
-`;
-
-const Number = styled.span`
-  margin: 0 0 1.5px 4.5px;
-  font-size: 11px;
-`;
-
-const LinkIconA = styled.a`
-  display: block;
-  height: 13px;
-  width: 13px;
-  background-position: 100% 100%;
-  background-repeat: no-repeat;
-`;
+import { IsLogin } from '../atom/atoms';
+import { useRecoilValue } from 'recoil';
 
 export const Tweet = ({
   profile,
@@ -163,6 +88,8 @@ export const Tweet = ({
   // });
   // console.log('1', contents);
 
+
+  const isLogin = useRecoilValue(IsLogin)
   useEffect(() => {
     if (copy) {
       setTimeout(() => {
@@ -171,46 +98,54 @@ export const Tweet = ({
     }
   }, [copy]);
 
+  //error 모든페이지에서 북마크 표시보임
+  const toggleItem = (e) => {
+    e.currentTarget.className += " active";
+    console.log(e.target)
+
+  }
+
   return (
-    <Box>
-      <Header>
-        <Profile background={profile} />
-        <NameSpace>
+    <Styled.Box>
+      <Styled.Header>
+        <Styled.Profile background={profile} />
+        <Styled.NameSpace>
           <span className='name'>{name}</span>
           <span className='id'>@{id}</span>
-        </NameSpace>
-        <BookMarkContianer
-          onClick={() =>
-            confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
-          }
+        </Styled.NameSpace>
+        <Styled.BookMarkContianer
+
         >
-          <BookmarkEmpty />
-        </BookMarkContianer>
-      </Header>
+          <Styled.BackgroundSpan onClick={(e) =>
+            isLogin ? toggleItem(e) : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+          } props='props' background={`${BookMarkImg}`}>bookmark</Styled.BackgroundSpan>
+          {/* <BookmarkEmpty /> */}
+        </Styled.BookMarkContianer>
+      </Styled.Header>
       <CopyToClipboard
         text={contents}
         onCopy={() => {
           setCopy(true);
         }}
       >
-        <Contents>{contents}</Contents>
+        <Styled.Contents>{contents}</Styled.Contents>
       </CopyToClipboard>
-      <Bottom>
-        <IconContainer>
-          <LinkIconA href={link} target='_blank' rel='noopener noreferrer'>
+      <Styled.Bottom>
+        <Styled.IconContainer>
+          <Styled.LinkIconA href={link} target='_blank' rel='noopener noreferrer'>
             <LinkIcon />
-          </LinkIconA>
-        </IconContainer>
-        <IconContainer>
+          </Styled.LinkIconA>
+        </Styled.IconContainer>
+        <Styled.IconContainer>
           <RetweetIcon />
-          <Number>{retweet}</Number>
-        </IconContainer>
-        <IconContainer>
+          <Styled.Number>{retweet}</Styled.Number>
+        </Styled.IconContainer>
+        <Styled.IconContainer>
           <HeartIcon />
-          <Number>{likes}</Number>
-        </IconContainer>
-      </Bottom>
+          <Styled.Number>{likes}</Styled.Number>
+        </Styled.IconContainer>
+      </Styled.Bottom>
       {copy ? <Floating /> : <></>}
-    </Box>
+    </Styled.Box>
   );
 };

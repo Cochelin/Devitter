@@ -105,15 +105,15 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => 
     }
     };
 
-    const onGoogleLogInFailure = (res) => {
-        alert('로그인 실패:', res);
-    };
+  const onGoogleLogInFailure = (res) => {
+    alert('로그인 실패:', res);
+  };
 
-    return (
-        <ModalWrap>
-            <Close onClick={() => setModalOpen(false)}>
-                <img src={iconClose} alt='close Button' />
-            </Close>
+  return (
+    <ModalWrap>
+      <Close onClick={() => setModalOpen(false)}>
+        <img src={iconClose} alt='close Button' />
+      </Close>
 
             <LoginWrap type='button'>
                 <GoogleLogin

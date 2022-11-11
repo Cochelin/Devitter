@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, NavLink, useParams } from 'react-router-dom';
 
 import * as A from './Category.style';
 
@@ -9,7 +10,6 @@ const Accordion = (props) => {
   const handleClick = (e) => {
     setNowCategory(e.target.innerText);
     toggle(e.target.innerText);
-    console.log(children);
     // if (summary === '인기트윗') {
     //   setHighCategory(summary);
     // }
@@ -32,18 +32,27 @@ const Accordion = (props) => {
   //     else setHighCategory(null);
   //   }
   // };
+  const params = useParams()
+  function isActive(summary) {
+    let nowSummery
+    if (params.categoryName === '취업' || params.categoryName === '블로깅') { nowSummery = 'For Junior' }
+    if (params.categoryName === 'JavaScript' || params.categoryName === 'React' || params.categoryName === 'Vue.js' || params.categoryName === 'HTML&CSS') { nowSummery = 'Front' }
+    if (params.categoryName === 'Spring' || params.categoryName === 'Java' || params.categoryName === 'Python') { nowSummery = 'Back' }
+    if (params.categoryName === undefined) { nowSummery = '인기트윗' }
 
+    return nowSummery === summary
+  }
   return (
     <A.AccordionBox
       key={summary}
       initial={summary === '인기트윗'}
       height={
-        summary === '인기트윗' ? 63 : open ? 63 + 22 + 25 * children.length : 63
+        summary === '인기트윗' ? 63 : open ? 63 + 22 + 35 * children.length : 63
       }
     >
       <A.Detail>
-        <A.Summary onClick={handleClick}>
-          <span className={open ? 'green' : null}>{summary}</span>
+        <A.Summary onClick={handleClick} active={isActive(summary)}>
+          <span  >{summary === '인기트윗' ? <Link to='/' >{summary}</Link> : summary}</span>
           {summary === '인기트윗' ? (
             <></>
           ) : open ? (
@@ -52,12 +61,14 @@ const Accordion = (props) => {
             <A.ArrowClose />
           )}
         </A.Summary>
-        <A.ContentBox shown={open} opacity={open ? 1 : 0}>
+        <A.ContentBox>
           <A.Content>
             {children.map((el) => {
               return (
-                <div key={el} className={nowCategory === el ? 'green' : null}>
+                <div key={el} className={nowCategory === el ? 'green' : null}> <NavLink to={`/${el}`}>
                   {el}
+
+                </NavLink>
                 </div>
               );
             })}

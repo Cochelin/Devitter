@@ -4,18 +4,6 @@
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: "IBMPlexSansKR-Medium";
-  src: url(../assets/font/IBMPlexSansKR-Medium.woff) format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "IBMPlexSansKR-Bold";
-  src: url(../assets/font/IBMPlexSansKR-Bold.woff) format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
 
 /* global color */
 :root {
@@ -30,7 +18,7 @@
 /* reset css */
 
 * {
-  font-family: "IBMPlexSansKR-Medium", Arial, Helvetica, sans-serif;
+  font-family: "IBMPlexSansKR-Regular", Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

@@ -8,6 +8,9 @@ import ImgTwitterLogo from '../assets/img/icon_twitter_header.png';
 import ImgLogin from '../assets/img/icon_login.png';
 import LoginModal from './popup/LoginModal';
 import LogoutModal from './popup/LogoutModal';
+import { useRecoilState } from 'recoil';
+import { IsLogin } from '../atom/atoms';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: table;
@@ -76,16 +79,20 @@ const FlexWarp = styled.div`
   display: flex;
   align-items: center;
 
-  & > img {
+  & a {
+    display: flex;
+  align-items: center;
+  }
+  & a > img {
     display: block;
   }
-  & > .ImgHeaderLogo {
+  & a > .ImgHeaderLogo {
     margin-left: -10px;
   }
-  & > .ImgHeaderX {
+  & a > .ImgHeaderX {
     margin-left: 8px;
   }
-  & > .ImgTwitterLogo {
+  & a > .ImgTwitterLogo {
     margin-left: 20px;
   }
   @media screen and (max-width: 850px) {
@@ -102,14 +109,14 @@ const UserSpan = styled.span`
   }
 `;
 
-const Header = () => {
+const Header = ({ forceUpdate }) => {
   //기본 설정
   // userName = '가나다'
   // isLogin = false
 
   const [isLoginModal, setIsLoginModal] = useState();
   const [modalOpen, setModalOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState(IsLogin);
   const [userName, setUserName] = useState('가나다');
   const [userImage, setUserImage] = useState(ImgLogin);
 
@@ -121,8 +128,8 @@ const Header = () => {
   const LoginModalClick = () => {
     isLogin
       ? setIsLoginModal(
-          <LogoutModal setModalOpen={setModalOpen} setIsLogin={setIsLogin} />
-        )
+        <LogoutModal setModalOpen={setModalOpen} setIsLogin={setIsLogin} />
+      )
       : setIsLoginModal(
           <LoginModal
             setModalOpen={setModalOpen}
@@ -134,13 +141,17 @@ const Header = () => {
 
     setModalOpen(!modalOpen);
   };
+
   return (
     <Container>
       <HeaderImgWrap>
         <FlexWarp>
-          <img className='ImgHeaderLogo' src={ImgHeaderLogo} />
-          <img className='ImgHeaderX' src={ImgHeaderX} />
-          <img className='ImgTwitterLogo' src={ImgTwitterLogo} />
+          <Link to='/' onClick={forceUpdate} >
+            <img className='ImgHeaderLogo' src={ImgHeaderLogo} />
+            <img className='ImgHeaderX' src={ImgHeaderX} />
+            <img className='ImgTwitterLogo' src={ImgTwitterLogo} />
+          </Link>
+
         </FlexWarp>
       </HeaderImgWrap>
       <LoginWrap>
