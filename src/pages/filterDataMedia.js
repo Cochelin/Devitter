@@ -25,42 +25,45 @@ const badWords = [
 ];
 
 
-// for (let i = 0; i < badWords.length; i++) {
-//     javascriptDummy = javascriptDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     jobsearchDummy = jobsearchDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     reactDummy = reactDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     htmlCssDummy = htmlCssDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     vueDummy = vueDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     springDummy = springDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     javaDummy = javaDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-//     pythonDummy = pythonDummy.filter(
-//         (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
-//     );
-// }
+
+let javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray;
+
+for (let i = 0; i < badWords.length; i++) {
+    javascriptArray = javascriptDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    jobsearchArray = jobsearchDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    reactArray = reactDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    htmlCssArray = htmlCssDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    vueArray = vueDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    springArray = springDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    javaArray = javaDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+    pythonArray = pythonDummy.filter(
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+    );
+}
 
 const allDummy = [
-    ...javascriptDummy,
-    // ...jobsearchDummy,
-    // ...reactDummy,
-    // ...vueDummy,
-    // ...htmlCssDummy,
-    // ...springDummy,
-    // ...javaDummy,
-    // ...pythonDummy,
+    ...javascriptArray,
+    ...jobsearchArray,
+    ...reactArray,
+    ...vueArray,
+    ...htmlCssArray,
+    ...springArray,
+    ...javaArray,
+    ...pythonArray,
 ];
 const descAllDummy = [...allDummy].sort((a, b) => b["리트윗수"] - a["리트윗수"]);
 
@@ -70,17 +73,7 @@ const descAllDummy = [...allDummy].sort((a, b) => b["리트윗수"] - a["리트�
 // }
 
 // 날짜별 정렬 (완료안됨)
-// const TodayDummy = [...allDummy].sort((a, b) => b.value9 - a.value9);
+// const TodayDummy = [...allDummy].sort((a, b) => b["작성일"] - a["작성일"]);
 
-
-// export {
-//     descAllDummy, javascriptDummy, jobsearchDummy,
-//     reactDummy,
-//     vueDummy,
-//     htmlCSSDummy,
-//     springDummy,
-//     javaDummy,
-//     pythonDummy
-// }
 
 export { descAllDummy }
