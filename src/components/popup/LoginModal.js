@@ -101,7 +101,7 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => 
       console.log(res.profileObj)
       setIsLogin(true);
       setUserName(name);
-      // setUserImage(res.profileObj.imageUrl); // 프로필 이미지 설정
+      setUserImage(res.profileObj.imageUrl); // 프로필 이미지 설정
     }
     };
 

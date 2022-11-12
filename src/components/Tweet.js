@@ -23,6 +23,7 @@ export const Tweet = ({
   name,
   id,
   contents,
+  media,
   retweet,
   likes,
   link,
@@ -102,7 +103,6 @@ export const Tweet = ({
   const toggleItem = (e) => {
     e.currentTarget.className += " active";
     console.log(e.target)
-
   }
 
   return (
@@ -130,6 +130,10 @@ export const Tweet = ({
       >
         <Styled.Contents>{contents}</Styled.Contents>
       </CopyToClipboard>
+
+      {/* 미디어가 있을때만 추가 */}
+      {media.length >= 1 ? <Styled.Media background={media[0]}/> : <></>}
+      
       <Styled.Bottom>
         <Styled.IconContainer>
           <Styled.LinkIconA href={link} target='_blank' rel='noopener noreferrer'>

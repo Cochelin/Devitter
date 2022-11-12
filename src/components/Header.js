@@ -78,6 +78,7 @@ const LogoutBtn = styled.button`
 const FlexWarp = styled.div`
   display: flex;
   align-items: center;
+  
 
   & a {
     display: flex;

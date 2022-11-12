@@ -95,3 +95,10 @@ width: 13px;
 background-position: 100% 100%;
 background-repeat: no-repeat;
 `;
+
+export const Media = styled.div`
+margin: 16px 0 9px 7px;
+width: 310px;
+height: 300px;
+background: url(${(props) => props.background}) ;
+`;
