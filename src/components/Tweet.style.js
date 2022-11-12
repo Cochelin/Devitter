@@ -97,8 +97,14 @@ background-repeat: no-repeat;
 `;
 
 export const Media = styled.div`
-margin: 16px 0 9px 7px;
-width: 310px;
-height: 300px;
-background: url(${(props) => props.background}) ;
+margin: 16px 7px 9px 7px;
+min-width: 310px;
+min-height: 100px;
 `;
+
+export const MediaContent = styled.img`
+  width: 100%;
+  height: 100%;
+  src: url(${(props) => props.src});
+  object-fit: contain;
+`

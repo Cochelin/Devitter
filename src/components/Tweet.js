@@ -132,7 +132,10 @@ export const Tweet = ({
       </CopyToClipboard>
 
       {/* 미디어가 있을때만 추가 */}
-      {media.length >= 1 ? <Styled.Media background={media[0]}/> : <></>}
+      {media.length >= 1 ?
+      <Styled.Media>
+        <Styled.MediaContent src={media[0]} />
+      </Styled.Media> : <></>}
       
       <Styled.Bottom>
         <Styled.IconContainer>
