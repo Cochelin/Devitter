@@ -3168,3 +3168,5 @@ const jobsearchDummy = [
         "작성일": "2022-11-07 15:00:00 +0900"
     }
 ]
+
+export default jobsearchDummy;
