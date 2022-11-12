@@ -23,35 +23,37 @@ const badWords = [
     '개웃',
 
 ];
-
+const badUserName = [
+    '미스터블루 공식추천봇'
+]
 
 
 let javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray;
 
 for (let i = 0; i < badWords.length; i++) {
     javascriptArray = javascriptDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     jobsearchArray = jobsearchDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     reactArray = reactDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     htmlCssArray = htmlCssDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     vueArray = vueDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     springArray = springDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     javaArray = javaDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
     pythonArray = pythonDummy.filter(
-        (el) => el["내용"].indexOf(badWords[i]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
+        (el) => el["내용"].indexOf(badWords[i]) === -1 && el["유저네임"].indexOf(badUserName[0]) === -1 && (el["리트윗수"] > 20 || el["좋아요수"] > 80)
     );
 }
 
