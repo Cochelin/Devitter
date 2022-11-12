@@ -8,5 +8,5 @@ export const BookMarkList = atom({
 
 export const IsLogin = atom({
     key: 'IsLogin',
-    default: true
+    default: false
 })

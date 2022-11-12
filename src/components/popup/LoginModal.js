@@ -4,11 +4,6 @@ import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
 import iconClose from '../../assets/img/icon_close.png';
-import iconTwitter from '../../assets/img/icon_twitter.png';
-import iconGithub from '../../assets/img/icon-github.png';
-import iconGoogle from '../../assets/img/icon_google.png';
-// import NaverLogin from '../Login/NaverLogin';
-// import NaverLogout from '../Login/NaverLogout';
 
 const ModalWrap = styled.div`
   width: 220px;
@@ -56,7 +51,7 @@ const LoginWrap = styled.button`
         align-items: center;
     }
     & button div svg {
-       transform: scale(0.8);
+        transform: scale(0.8);
     }
     & button span {
         width: 100% !important;
@@ -106,7 +101,7 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => 
     };
 
   const onGoogleLogInFailure = (res) => {
-    alert('로그인 실패:', res);
+    alert('로그인을 다시 진행해주세요:', res);
   };
 
   return (
