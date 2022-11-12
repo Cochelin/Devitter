@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as Styled from './Home.style'
 
-import { descAllDummy } from './filterDataMedia'
+import { descAllDummy, javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray } from './filterDataMedia';
 // import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
 import { Tweet } from '../components/Tweet';
 import { useParams } from 'react-router-dom';
@@ -58,15 +58,15 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
 
     useEffect(() => {
         if (parmas.categoryName === undefined) setNowData(descAllDummy)
-        // if (parmas.categoryName === '취업') setNowData(javascriptDummy)
-        // if (parmas.categoryName === '블로깅') setNowData(javascriptDummy)
-        // if (parmas.categoryName === 'JavaScript') setNowData(javascriptDummy)
-        // if (parmas.categoryName === 'React') setNowData(reactDummy)
-        // if (parmas.categoryName === 'Vue.js') setNowData(vueDummy)
-        // if (parmas.categoryName === 'HTML&CSS') setNowData(htmlAndCssDummy)
-        // if (parmas.categoryName === 'Spring') setNowData(springDummy)
-        // if (parmas.categoryName === 'Java') setNowData(javaDummy)
-        // if (parmas.categoryName === 'Python') setNowData(pythonDummy)
+        if (parmas.categoryName === '취업') setNowData(jobsearchArray)
+        // if (parmas.categoryName === '블로깅') setNowData(javascriptArray)
+        if (parmas.categoryName === 'JavaScript') setNowData(javascriptArray)
+        if (parmas.categoryName === 'React') setNowData(reactArray)
+        if (parmas.categoryName === 'Vue.js') setNowData(vueArray)
+        if (parmas.categoryName === 'HTML&CSS') setNowData(htmlCssArray)
+        if (parmas.categoryName === 'Spring') setNowData(springArray)
+        if (parmas.categoryName === 'Java') setNowData(javaArray)
+        if (parmas.categoryName === 'Python') setNowData(pythonArray)
 
     }, [parmas.categoryName])
 

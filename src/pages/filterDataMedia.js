@@ -78,4 +78,4 @@ const descAllDummy = [...allDummy].sort((a, b) => b["리트윗수"] - a["리트�
 // const TodayDummy = [...allDummy].sort((a, b) => b["작성일"] - a["작성일"]);
 
 
-export { descAllDummy }
+export { descAllDummy, javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray  }
