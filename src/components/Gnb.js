@@ -6,6 +6,8 @@ import BookMarkerActive from '../assets/img/bookMarker_active_16.png'
 import IconGNbList from '../assets/img/icon_gnb_list.png'
 import IconGNbListActive from '../assets/img/icon_gnb_list_active.png'
 import { confirm } from './../components/popup/confirm'
+import { IsLogin, updateState } from '../atom/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Container = styled.div`
     display: table;
@@ -103,7 +105,7 @@ margin-bottom:-2px;
 }
 `
 
-const Gnb = ({ forceUpdate }) => {
+const Gnb = () => {
     // const [nowTab, setNowTab] = useState('all')
     /*
     nowTab 
@@ -115,9 +117,16 @@ const Gnb = ({ forceUpdate }) => {
         return path.length < 2 ? window.location.pathname.endsWith(path) : window.location.pathname.startsWith(path);
     }
     //강제 재랜더링
+    const [, setUpdateState] = useRecoilState(updateState)
+    const forceUpdate = useCallback(() => setUpdateState({}), [])
+    const isLogin = useRecoilValue(IsLogin)
 
-
-
+    const gnbOnClick = () => {
+        if (!isLogin) {
+            // confirm('로그인 후 이용해주세요', '로그인', '취소');
+            forceUpdate()
+        }
+    }
     return (
         <Container>
             <FlexWarp>
@@ -141,14 +150,21 @@ const Gnb = ({ forceUpdate }) => {
                     </Link>
                 </ListClickArea>
                 <ListClickArea active={isActive('/BookMark')}>
-                    <Link onClick={forceUpdate} to='/BookMark/1/10' >
 
-                        북마크  <img className="BookMarker" src={isActive('/BookMark') ? BookMarkerActive : BookMarker} />
-                        {/* {nowTab === 'bookmark' ?
+                    {
+                        isLogin ?
+                            <Link onClick={forceUpdate} to='/BookMark/1/10' >
+
+                                북마크  <img className="BookMarker" src={isActive('/BookMark') ? BookMarkerActive : BookMarker} />
+                                {/* {nowTab === 'bookmark' ?
                             <img className="BookMarker" src={BookMarkerActive} /> :
                             <img className="BookMarker" src={BookMarker} />} */}
 
-                    </Link>
+                            </Link>
+                            :
+                            null
+                    }
+
                 </ListClickArea>
             </FlexWarp>
         </Container>

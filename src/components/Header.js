@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 // img
@@ -9,7 +9,7 @@ import ImgLogin from '../assets/img/icon_login.png';
 import LoginModal from './popup/LoginModal';
 import LogoutModal from './popup/LogoutModal';
 import { useRecoilState } from 'recoil';
-import { IsLogin } from '../atom/atoms';
+import { IsLogin, updateState } from '../atom/atoms';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
@@ -112,11 +112,13 @@ const UserSpan = styled.span`
   }
 `;
 
-const Header = ({ forceUpdate }) => {
+const Header = () => {
   //기본 설정
   // userName = '가나다'
   // isLogin = false
 
+  const [, setUpdateState] = useRecoilState(updateState)
+  const forceUpdate = useCallback(() => setUpdateState({}), [])
   const [isLoginModal, setIsLoginModal] = useState();
   const [modalOpen, setModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(IsLogin);
@@ -134,13 +136,13 @@ const Header = ({ forceUpdate }) => {
         <LogoutModal setModalOpen={setModalOpen} setIsLogin={setIsLogin} />
       )
       : setIsLoginModal(
-          <LoginModal
-            setModalOpen={setModalOpen}
-            setIsLogin={setIsLogin}
+        <LoginModal
+          setModalOpen={setModalOpen}
+          setIsLogin={setIsLogin}
           setUserName={setUserName}
           setUserImage={setUserImage}
-          />
-        );
+        />
+      );
 
     setModalOpen(!modalOpen);
   };
