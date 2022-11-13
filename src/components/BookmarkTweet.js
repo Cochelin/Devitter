@@ -23,7 +23,7 @@ box-shadow: 0px 4px 11px 0px rgba(0, 0, 0, 0.2);
 `
 
 
-const BookmarkTweet = ({ profile, name, id, contents, link, retweet, likes }) => {
+const BookmarkTweet = ({ profile, name, id, contents, link, retweet, likes, media, }) => {
 
     // profile = 'black'
     // name = '이름이름'
@@ -68,6 +68,11 @@ const BookmarkTweet = ({ profile, name, id, contents, link, retweet, likes }) =>
             >
                 <Styled.Contents>{contents}</Styled.Contents>
             </CopyToClipboard>
+            {/* 미디어가 있을때만 추가 */}
+            {media.length >= 1 ?
+                <Styled.Media>
+                    <Styled.MediaContent src={media[0]} />
+                </Styled.Media> : <></>}
             <Styled.Bottom>
                 <Styled.IconContainer>
                     <Styled.LinkIconA href={link} target='_blank' rel='noopener noreferrer'>
