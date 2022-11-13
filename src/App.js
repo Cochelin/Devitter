@@ -11,19 +11,11 @@ import TwittCompo from './pages/TwittCompo';
 import { useCallback, useState } from 'react';
 import { useAxios } from './util/useAxios';
 function App() {
-  //패이지 active 를 위한 재랜더링
-  const [, updateState] = useState()
-  const forceUpdate = useCallback(() => updateState({}), [])
-  const { response, loading, error } = useAxios({
-    method: 'GET',
-    url: `/tweet/get`
-  });
-
   return (
     <BrowserRouter>
       <LoadingPage />
-      <Header forceUpdate={forceUpdate} />
-      <Gnb forceUpdate={forceUpdate} />
+      <Header />
+      <Gnb />
       <Routes>
         <Route path='/' element={<Home />} >
           <Route path='/' element={<TwittCompo />} />

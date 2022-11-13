@@ -91,15 +91,12 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
             }
         }
 
-        // window.onload = resizeAllGridItems();
+        window.onload = resizeAllGridItems();
         resizeAllGridItems();
         window.addEventListener('resize', resizeAllGridItems);
     }, [nowData]);
 
-    const { response, loading, error } = useAxios({
-        method: 'GET',
-        url: `/tweet/get`,
-    });
+
     return (
         <>
             <Styled.Article>
@@ -117,9 +114,6 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
                                 <div className='category'>{parmas.categoryName}</div>
                             </>
 
-                    }
-                    {
-                        response && <p>response 완료 {response[0].tweet_name}</p>
                     }
 
                 </Styled.ArticleInfo>
