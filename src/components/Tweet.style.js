@@ -23,7 +23,7 @@ margin: 0 20px 0 3px;
 width: 48px;
 height: 48px;
 border-radius: 50%;
-background: ${(props) => props.background};
+background: url(${(props) => props.background}) ;
 `;
 
 export const NameSpace = styled.div`

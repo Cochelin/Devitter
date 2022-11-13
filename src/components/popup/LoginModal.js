@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
 import iconClose from '../../assets/img/icon_close.png';
-
+import axios from 'axios';
 const ModalWrap = styled.div`
   width: 220px;
   padding: 18px;
@@ -91,6 +91,19 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => 
         sessionStorage.setItem('access_token', googleAccessToken);// 토큰 저장
         sessionStorage.setItem('email', res.profileObj.email);// 이메일 저장
 
+
+        // DB에 post
+        axios.post('http://175.106.96.145:5000/user/create', {
+          name: res.profileObj.name,
+          email: res.profileObj.email,
+          profile: res.profileObj.imageUrl,
+          nickname: res.profileObj.name, // 필요없을듯
+        }).then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
       let name = res.profileObj.name;
       console.log(res.profileObj)
