@@ -1,113 +1,80 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { BookMarkList } from '../../atom/atoms'
-import styled, { css } from 'styled-components';
-import OpenFolder from './../../assets/img/opend_folder_icon.png'
-import CloseFolder from './../../assets/img/folder_icon.png'
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { bookmarkIsSubmit, BookMarkList, BookmarkSettingToggle, UpdataeState } from '../../atom/atoms'
+import * as S from './BookmarkList.style'
 
-const Ul = styled.ul`
+import { useAxios } from '../../util/useAxios';
+import BookmarkAdd from './BookmarkAdd';
+import BookmarkDelete from './BookmarkDelete';
+import BookmarkLi from './BookmarkLi';
+import SubBookmarkAdd from './SubBookmarkAdd';
 
-margin-top: 25px;
-padding-bottom:10px;
-border-bottom: 1px solid var(--dark-gray-color);
-& p span{
-    width: 25px;
-    height: 24px;
-    display: block;
-    font-size: 0;
-background-image: url(${CloseFolder});
-margin-right: 8px;    
-}
-
-& p {
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    margin-bottom: 24px;
-    ${(p) =>
-        p.active &&
-        css`
-     color: var(--point-green-color);
-     & span{
-        background-image: url(${OpenFolder});
-     }
-     `
-    }
-}
-
-
-
-
-
-
-`
-const Li = styled.li`
-font-size: 15px;
-font-weight: 400;
-margin-bottom: 16px;
-margin-left: 25px;
-
-& .active{
-    color: var( --point-green-color);
-}
-& .active span {
-    background-image: url(${OpenFolder});
-}
-& span {
-    width: 25px;
-    height: 24px;
-    display: block;
-    font-size: 0;
-background-image: url(${CloseFolder});
-margin-right: 8px;
-}
-& a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-`
 const BookmarkList = () => {
     const bookmarkDummy = useRecoilValue(BookMarkList)
+    const [isupdate, updateState] = useRecoilState(UpdataeState)
+    const forceUpdate = useCallback(() => updateState({}), [])
 
     function isActive(path) {
         return window.location.pathname.startsWith(path);
     }
-
+    const bookmarkSetting = useRecoilValue(BookmarkSettingToggle)
     //강제 재랜더링
-    const [, updateState] = useState()
-    const forceUpdate = useCallback(() => updateState({}), [])
 
-    const [tabOpen, setTabOpen] = useState()
 
+    const isSubmit = useRecoilValue(bookmarkIsSubmit)
+    const { response, loading, error, clickFetchFunc } = useAxios({
+
+    }, false);
+
+    useEffect(() => {
+        clickFetchFunc({
+            method: 'GET',
+            url: `/bookmark/get`,
+        })
+    }, [isSubmit, isupdate])
+
+    const user_id = 'e5d3cd75-60f5-4cac-8005-a61bcaa582ee'
+
+    const [bookmarkList, setBookmarkList] = useState([])
+    useEffect(() => {
+        if (response) {
+            setBookmarkList(response.filter(e => e.user_id === user_id))
+
+        }
+    }, [response])
+
+
+
+
+
+    response && console.log(bookmarkList)
     return (
-        <div>
+        <S.BookMarkWarp>
 
             {
-                bookmarkDummy.map((el, idx) => {
-                    const mainId = el.id
-                    return (<Ul active={isActive(`/BookMark/${el.id}`)}>
+                response &&
+                bookmarkList.map((el, idx) => {
+
+                    return (<S.Ul active={isActive(`/BookMark/${el.id}`)}>
                         <p  >
-                            <span  >img</span> {el.name}
+                            <div><span  >img</span> {el.name}</div>  {bookmarkSetting ? <BookmarkDelete el={el} /> : null}
                         </p>
 
-                        {
-                            el.children.map((el) => {
-                                return <Li><NavLink onClick={forceUpdate} to={`${mainId}/${el.id}`}><span >img</span>{el.name}</NavLink></Li>
-                            })
-                        }
-
-
-                    </Ul>)
+                        <BookmarkLi parent={el.id} parentName={el.name} />
+                        <SubBookmarkAdd parent={el.id} />
+                    </S.Ul>)
 
                 })
             }
 
+            {
+                bookmarkSetting ? <BookmarkAdd /> : null
+            }
 
 
+        </S.BookMarkWarp>
 
-        </div>
     );
 };
 

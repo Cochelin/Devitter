@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import SettingIcon from '../../assets/img/icon_setting.png'
+import { BookmarkSettingToggle } from '../../atom/atoms';
 import BookmarkList from './BookmarkList';
 const BookMarkCategory = styled.div`
+position: fixed;
+top: 142px;
+left: 0;
     min-width: 280px;
     padding:48px;
+& button {
+    cursor: pointer;
+background-color: transparent;
+border: 1px solid var(--point-green-color);
+padding: 4px 8px;
+margin-top: 10px;
+border-radius: 3px;
+}
 
+
+& button.deleteBtn{
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
 
 `
 const Header = styled.div`
@@ -28,11 +48,19 @@ border-bottom: 1px solid var(--dark-gray-color);
 `
 
 const BookmarkCategory = () => {
+    const [bookmarkSettingToggle, setBookmarkSettingToggle] = useRecoilState(BookmarkSettingToggle)
+
+    const onClickFunc = () => {
+        setBookmarkSettingToggle(!bookmarkSettingToggle)
+    }
     return (
         <BookMarkCategory>
             <Header>
                 <p>북마크</p>
-                <button> <img src={SettingIcon} /></button>
+                {
+                    bookmarkSettingToggle ? <button onClick={onClickFunc}>수정 취소</button> : <button onClick={onClickFunc}> <img src={SettingIcon} /></button>
+                }
+
 
 
             </Header>
