@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { IsLogin } from '../atom/atoms';
+import { IsLogin, updateState } from '../atom/atoms';
+import { confirm } from './../components/popup/confirm'
 import BookmarkList from '../components/Bookmark/BookmarkCategory';
 import BookMarkContainer from '../components/BookMarkContainer';
 import BookmarkTweet from './../components/BookmarkTweet';
@@ -22,9 +23,12 @@ const Bookmark = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
+    const [, setUpdateState] = useRecoilState(updateState)
+    const forceUpdate = useCallback(() => setUpdateState({}), [])
+
     useEffect(() => {
         if (!isLogin) {
-            alert('로그인 후 이용해주세요.');
+            confirm('로그인 후 이용해주세요', '로그인', '취소');
             navigate('/', { state: pathname });
         }
     }, [])

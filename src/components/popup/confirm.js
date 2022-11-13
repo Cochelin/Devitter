@@ -3,10 +3,9 @@ import './css/confirm.css';
 import './css/modal.css';
 import iconClose from '../../assets/img/icon_close.png'
 import Select from './Select';
-import { useState } from 'react';
 
 //Delete bookmark conmfirm
-const confirm = (head, Yes, No) => {
+const confirm = (head, Yes, No, yesState, noState) => {
     confirmAlert({
         customUI: ({ onClose }) => {
             return (
@@ -29,14 +28,29 @@ const confirm = (head, Yes, No) => {
 }
 
 //add bookmark > select modal 
-const modalSelect = () => {
+const modalSelect = (key) => {
+
+    // const getSelectItem = (bookmark_id, key) => {
+    //     const fetchData = async (params) => {
+    //         try {
+    //             const result = await axios.request(params);
+    //         } catch (error) {
+    //         } finally {
+    //         }
+    //     };
+
+    //     fetchData({
+
+    //     })
+    // }
+
     confirmAlert({
         customUI: ({ onClose }) => {
             return (
                 <div className='react-confirm-alert-body'>
                     <h5>북마크 추가</h5> <span><img src={iconClose} onClick={onClose} /></span>
                     <Select />
-
+                    {/* getSelectItem={getSelectItem} */}
                     <div className='react-confirm-alert-button-group'>
                         <button className='one' onClick={onClose}>확인</button>
 

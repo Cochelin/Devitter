@@ -13,13 +13,14 @@ import { ReactComponent as RetweetIcon } from './../assets/img/retweet_icon.svg'
 import BookMarkActiveImg from './../assets/img/bookMarker.png'
 import BookMarkImg from './../assets/img/bookMarkNone.png'
 
-import { confirm } from './popup/confirm';
+import { confirm, modalSelect } from './popup/confirm';
 import Floating from './popup/Floating';
 import { IsLogin } from '../atom/atoms';
 import { useRecoilValue } from 'recoil';
 
 export const Tweet = ({
   profile,
+  key,
   name,
   id,
   contents,
@@ -100,6 +101,12 @@ export const Tweet = ({
   }, [copy]);
 
   //error 모든페이지에서 북마크 표시보임
+
+
+  const BookMarkOn = (e) => {
+    modalSelect(key)
+    toggleItem(e)
+  }
   const toggleItem = (e) => {
     e.currentTarget.className += " active";
     console.log(e.target)
@@ -117,7 +124,7 @@ export const Tweet = ({
 
         >
           <Styled.BackgroundSpan onClick={(e) =>
-            isLogin ? toggleItem(e) : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+            isLogin ? BookMarkOn(e) : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
           } props='props' background={`${BookMarkImg}`}>bookmark</Styled.BackgroundSpan>
           {/* <BookmarkEmpty /> */}
         </Styled.BookMarkContianer>
@@ -133,10 +140,10 @@ export const Tweet = ({
 
       {/* 미디어가 있을때만 추가 */}
       {media.length >= 1 ?
-      <Styled.Media>
-        <Styled.MediaContent src={media[0]} />
-      </Styled.Media> : <></>}
-      
+        <Styled.Media>
+          <Styled.MediaContent src={media[0]} />
+        </Styled.Media> : <></>}
+
       <Styled.Bottom>
         <Styled.IconContainer>
           <Styled.LinkIconA href={link} target='_blank' rel='noopener noreferrer'>
