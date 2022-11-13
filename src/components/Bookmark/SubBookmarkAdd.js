@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { BookmarkSettingToggle, OnChangeValue, UpdataeState } from '../../atom/atoms';
+import { BookmarkSettingToggle, NowUserName, OnChangeValue, UpdataeState, UserName } from '../../atom/atoms';
 import { useAxios } from '../../util/useAxios';
 import * as S from './BookmarkList.style'
 
@@ -9,6 +9,7 @@ import * as S from './BookmarkList.style'
 
 const SubBookmarkAdd = ({ parent }) => {
     const [toggleBookmark, setToggleBookmark] = useState(false)
+    const user_id = useRecoilValue(NowUserName)
     const ToggleBookmark = () => {
         setToggleBookmark(!toggleBookmark)
     }
@@ -34,7 +35,7 @@ const SubBookmarkAdd = ({ parent }) => {
                 method: 'POST',
                 url: `/subBookmark/create`,
                 data: {
-                    user_id: 'e5d3cd75-60f5-4cac-8005-a61bcaa582ee',
+                    user_id: user_id,
                     name: onChangeValue.SubBookmarkName,
                     parent: parent
                 }

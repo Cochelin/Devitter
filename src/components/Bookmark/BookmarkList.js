@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { bookmarkIsSubmit, BookMarkList, BookmarkSettingToggle, UpdataeState } from '../../atom/atoms'
+import { bookmarkIsSubmit, BookMarkList, BookmarkSettingToggle, NowUserName, UpdataeState, UserName } from '../../atom/atoms'
 import * as S from './BookmarkList.style'
 
 import { useAxios } from '../../util/useAxios';
@@ -14,6 +14,7 @@ const BookmarkList = () => {
     const bookmarkDummy = useRecoilValue(BookMarkList)
     const [isupdate, updateState] = useRecoilState(UpdataeState)
     const forceUpdate = useCallback(() => updateState({}), [])
+    const user_id = useRecoilValue(NowUserName)
 
     function isActive(path) {
         return window.location.pathname.startsWith(path);
@@ -34,7 +35,6 @@ const BookmarkList = () => {
         })
     }, [isSubmit, isupdate])
 
-    const user_id = 'e5d3cd75-60f5-4cac-8005-a61bcaa582ee'
 
     const [bookmarkList, setBookmarkList] = useState([])
     useEffect(() => {
@@ -48,7 +48,7 @@ const BookmarkList = () => {
 
 
 
-    response && console.log(bookmarkList)
+    response && console.log('bookmarkList', bookmarkList)
     return (
         <S.BookMarkWarp>
 
@@ -67,10 +67,7 @@ const BookmarkList = () => {
 
                 })
             }
-
-            {
-                bookmarkSetting ? <BookmarkAdd /> : null
-            }
+            <BookmarkAdd />
 
 
         </S.BookMarkWarp>

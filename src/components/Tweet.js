@@ -15,7 +15,7 @@ import BookMarkImg from './../assets/img/bookMarkNone.png'
 
 import { confirm, modalSelect } from './popup/confirm';
 import Floating from './popup/Floating';
-import { IsLogin } from '../atom/atoms';
+import { IsLogin, NowUserName } from '../atom/atoms';
 import { useRecoilValue } from 'recoil';
 
 export const Tweet = ({
@@ -99,12 +99,12 @@ export const Tweet = ({
       }, 2000);
     }
   }, [copy]);
-
+  const user_id = useRecoilValue(NowUserName)
   //error 모든페이지에서 북마크 표시보임
 
 
   const BookMarkOn = (e) => {
-    modalSelect(key)
+    modalSelect(user_id)
     toggleItem(e)
   }
   const toggleItem = (e) => {
@@ -124,7 +124,7 @@ export const Tweet = ({
 
         >
           <Styled.BackgroundSpan onClick={(e) =>
-            isLogin ? BookMarkOn(e) : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+            isLogin ? BookMarkOn() : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
           } props='props' background={`${BookMarkImg}`}>bookmark</Styled.BackgroundSpan>
           {/* <BookmarkEmpty /> */}
         </Styled.BookMarkContianer>

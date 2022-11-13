@@ -24,7 +24,7 @@ const SubSelect = ({ parent }) => {
         <>
             {
                 subBookmarkList.map(el => {
-                    return <option value={el.id}>{el.name}</option>
+                    return <option value={el.id} > {el.name}</option>
                 })
             }
 

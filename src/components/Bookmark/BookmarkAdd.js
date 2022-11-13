@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { bookmarkIsSubmit } from '../../atom/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { bookmarkIsSubmit, NowUserName, UserName } from '../../atom/atoms';
 import { useAxios } from '../../util/useAxios';
 import * as S from './BookmarkList.style'
 
@@ -11,6 +11,7 @@ const BookmarkAdd = () => {
 
     const [isSubmit, setIsSubmit] = useRecoilState(bookmarkIsSubmit);
     const [subBookMarkSubmit, setSubBookMarkSubmit] = useState(false);
+    const user_id = useRecoilValue(NowUserName)
     const [subBookMarkSend, setSubBookMarkSend] = useState({})
     const { response, loading, error, clickFetchFunc } = useAxios({
     }, false);
@@ -21,7 +22,7 @@ const BookmarkAdd = () => {
                 method: 'POST',
                 url: `/bookmark/create`,
                 data: {
-                    user_id: 'e5d3cd75-60f5-4cac-8005-a61bcaa582ee',
+                    user_id: user_id,
                     name: bookmarkName.MainBookmarkName
                 }
             });
@@ -49,7 +50,7 @@ const BookmarkAdd = () => {
                 method: 'POST',
                 url: `/subBookmark/create`,
                 data: {
-                    user_id: 'e5d3cd75-60f5-4cac-8005-a61bcaa582ee',
+                    user_id: user_id,
                     name: bookmarkName.SubBookmarkName,
                     parent: subBookMarkSend.parent
                 }

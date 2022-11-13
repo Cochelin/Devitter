@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { IsSelectBookmark } from '../../atom/atoms';
+import { IsSelectBookmark, NowUserName } from '../../atom/atoms';
 import { useAxios } from '../../util/useAxios';
 import SubSelect from './SubSelect';
 
@@ -18,14 +18,14 @@ border: 1px solid var(--point-green-color);
 border-radius: 3px;
 `
 
-const Select = ({ getSelectItem }) => {
+const Select = ({ getSelectItem, user_id }) => {
     const { response, loading, error, clickFetchFunc } = useAxios(
         {
             method: 'GET',
             url: `/bookmark/get`,
         }
     );
-    const user_id = 'e5d3cd75-60f5-4cac-8005-a61bcaa582ee'
+
 
     const [bookmarkList, setBookmarkList] = useState([])
     useEffect(() => {
@@ -37,7 +37,6 @@ const Select = ({ getSelectItem }) => {
 
     const selectValue = (e) => {
         getSelectItem(e.target.value)
-        console.log(e.target.value)
     }
 
     return (

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import iconClose from '../../assets/img/icon_close.png'
 
 import { GoogleLogout } from 'react-google-login'
+import { useNavigate } from 'react-router-dom';
 const ModalWrap = styled.div`
     width: 220px;
     padding: 18px;
@@ -44,11 +45,13 @@ const LoginWrap = styled.button`
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const LogoutModal = ({ setModalOpen, setIsLogin }) => {
+    const navigate = useNavigate()
 
     const onGoogleLogoutSuccess = (res) => {
         setIsLogin(false);
         alert('성공적으로 로그아웃되었습니다');
         sessionStorage.clear();
+        navigate('/')
 
     }
     return (
@@ -60,7 +63,7 @@ const LogoutModal = ({ setModalOpen, setIsLogin }) => {
                     buttonText='로그아웃'
                     onLogoutSuccess={onGoogleLogoutSuccess}
                 />
-                
+
             </LoginWrap>
         </ModalWrap>
     );
