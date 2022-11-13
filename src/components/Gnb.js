@@ -162,7 +162,14 @@ const Gnb = () => {
 
                             </Link>
                             :
-                            null
+                            <Link to='/BookMark/1/10' >
+
+                                북마크  <img className="BookMarker" src={isActive('/BookMark') ? BookMarkerActive : BookMarker} />
+                                {/* {nowTab === 'bookmark' ?
+                        <img className="BookMarker" src={BookMarkerActive} /> :
+                        <img className="BookMarker" src={BookMarker} />} */}
+
+                            </Link>
                     }
 
                 </ListClickArea>

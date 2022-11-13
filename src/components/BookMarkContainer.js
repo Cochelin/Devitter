@@ -160,7 +160,7 @@ const BookMarkContainer = ({ props }) => {
                     //     filtersubBookMarkDummy[0].children.map((tweet, idx) => {
                     //         const media = tweet["미디어URL"] === '[]' ? [] : tweet["미디어URL"].slice(1, -1).replaceAll('\"', '').replaceAll(' ', '').split(',');
                     //         return (<BookmarkTweet
-                    //             // profile={gradientMap()[idx]}
+                    //            profile={tweet["유저 프로파일 이미지"]}
                     //             name={tweet["유저네임"]}
                     //             key={idx}
                     //             link={tweet["URL"]}

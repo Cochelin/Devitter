@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
 import iconClose from '../../assets/img/icon_close.png';
 import axios from 'axios';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { NowUserName, UserName } from '../../atom/atoms';
 const ModalWrap = styled.div`
   width: 220px;
   padding: 18px;
@@ -74,33 +76,34 @@ const GoogleImg = styled.img`
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 let data = '';
 const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => {
-    useEffect(() => {
-        function start() {
-            gapi.client.init({
-                clientId: CLIENT_ID,
-                scope: 'profile',
-            });
-        }
-        gapi.load('client:auth2', start);
-    });
-    
-
-    const onGoogleLoginSuccess = (res) => {
-      if (gapi.auth) {
-        let googleAccessToken = gapi.auth.getToken().access_token;
-        sessionStorage.setItem('access_token', googleAccessToken);// 토큰 저장
-        sessionStorage.setItem('email', res.profileObj.email);// 이메일 저장
+  const userName = useRecoilValue(UserName)
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: CLIENT_ID,
+        scope: 'profile',
+      });
+    }
+    gapi.load('client:auth2', start);
+  });
 
 
-        // DB에 post
-        axios.post('http://175.106.96.145:5000/user/create', {
-          name: res.profileObj.name,
-          email: res.profileObj.email,
-          profile: res.profileObj.imageUrl,
-          nickname: res.profileObj.name, // 필요없을듯
-        }).then(function (response) {
-          console.log(response);
-        })
+  const onGoogleLoginSuccess = (res) => {
+    if (gapi.auth) {
+      let googleAccessToken = gapi.auth.getToken().access_token;
+      sessionStorage.setItem('access_token', googleAccessToken);// 토큰 저장
+      sessionStorage.setItem('email', res.profileObj.email);// 이메일 저장
+
+
+      // DB에 post
+      axios.post('http://175.106.96.145:5000/user/create', {
+        name: res.profileObj.name,
+        email: res.profileObj.email,
+        profile: res.profileObj.imageUrl,
+        nickname: res.profileObj.name, // 필요없을듯
+      }).then(function (response) {
+        console.log(response);
+      })
         .catch(function (error) {
           console.log(error);
         });
@@ -111,8 +114,36 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => 
       setUserName(name);
       setUserImage(res.profileObj.imageUrl); // 프로필 이미지 설정
     }
-    };
+  };
 
+  const [userData, setUserData] = useState([])
+  const [nowUserId, setNowUserId] = useRecoilState(NowUserName)
+  useEffect(() => {
+    if (userName) {
+      axios.get('http://175.106.96.145:5000/user/get',)
+        .then(function (response) {
+          setUserData(response.data)
+          setNowUserId(response.data.filter(el => el.name === userName).pop().id)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    console.log('유저이름222', userName)
+
+
+  }, [userName])
+  console.log('nowUserId', nowUserId)
+
+  // useEffect(() => {
+  //   console.log('유저이름', userName)
+  //   if (userData) {
+  //     const data = userData
+  //     console.log('유저데이터', userData)
+  //     // setNowUserName(data.id)
+  //   }
+
+  // }, [userData])
   const onGoogleLogInFailure = (res) => {
     alert('로그인을 다시 진행해주세요:', res);
   };
@@ -123,18 +154,18 @@ const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => 
         <img src={iconClose} alt='close Button' />
       </Close>
 
-            <LoginWrap type='button'>
-                <GoogleLogin
-                    client_id={CLIENT_ID}
-                    buttonText='로그인'
-                    onSuccess={onGoogleLoginSuccess}
-                    onFailure={onGoogleLogInFailure}
-                    cookiePolicy={'single_host_orgin'}
-                    isSignedIn={true}
-                />
-            </LoginWrap>
-        </ModalWrap>
-    );
+      <LoginWrap type='button'>
+        <GoogleLogin
+          client_id={CLIENT_ID}
+          buttonText='로그인'
+          onSuccess={onGoogleLoginSuccess}
+          onFailure={onGoogleLogInFailure}
+          cookiePolicy={'single_host_orgin'}
+          isSignedIn={true}
+        />
+      </LoginWrap>
+    </ModalWrap>
+  );
 };
 
 export default LoginModal;

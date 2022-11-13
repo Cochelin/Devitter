@@ -1,5 +1,8 @@
 import { atom } from 'recoil'
 import bookmarkList from '../static/BookmarkDummy'
+import { recoilPersist } from 'recoil-persist'
+
+const { persistAtom } = recoilPersist()
 
 export const BookMarkList = atom({
     key: 'bookmarkList',
@@ -8,7 +11,8 @@ export const BookMarkList = atom({
 
 export const IsLogin = atom({
     key: 'IsLogin',
-    default: true
+    default: false,
+    effects_UNSTABLE: [persistAtom],
 })
 
 export const updateState = atom({
@@ -38,10 +42,20 @@ export const IsSelectBookmark = atom({
 
 export const BookmarkSettingToggle = atom({
     key: 'BookmarkSettingToggle',
-    default: 'false'
+    default: false
 })
 
 export const NowBookMark = atom({
     key: 'NowBookMark',
     default: {}
+})
+
+export const NowUserName = atom({
+    key: 'NowUserName',
+    default: ''
+})
+export const UserName = atom({
+    key: 'UserName',
+    default: '가나다',
+    effects_UNSTABLE: [persistAtom],
 })
