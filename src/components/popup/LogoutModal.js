@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import iconClose from '../../assets/img/icon_close.png'
 
-import { GoogleLogin } from 'react-google-login'
+import { GoogleLogout } from 'react-google-login'
 const ModalWrap = styled.div`
     width: 220px;
     padding: 18px;
@@ -48,17 +48,19 @@ const LogoutModal = ({ setModalOpen, setIsLogin }) => {
     const onGoogleLogoutSuccess = (res) => {
         setIsLogin(false);
         alert('성공적으로 로그아웃되었습니다');
+        sessionStorage.clear();
 
     }
     return (
         <ModalWrap>
             <Close onClick={() => setModalOpen(false)} ><img src={iconClose} alt='close Button' /></Close>
             <LoginWrap>
-                <GoogleLogin
+                <GoogleLogout
                     client_id={CLIENT_ID}
                     buttonText='로그아웃'
-                    onSuccess={onGoogleLogoutSuccess}
+                    onLogoutSuccess={onGoogleLogoutSuccess}
                 />
+                
             </LoginWrap>
         </ModalWrap>
     );

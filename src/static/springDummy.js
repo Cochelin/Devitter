@@ -2784,3 +2784,5 @@ const springDummy = [
         "작성일": "2022-11-07 17:19:59 +0900"
     },
 ]
+
+export default springDummy;

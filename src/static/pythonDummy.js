@@ -8208,3 +8208,5 @@ const pythonDummy = [
         "작성일": "2022-11-09 17:29:20 +0900"
     },
 ]
+
+export default pythonDummy;

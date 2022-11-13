@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as Styled from './Home.style'
 
-import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
+import { descAllDummy, javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray } from './filterDataMedia';
+// import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
 import { Tweet } from '../components/Tweet';
 import { useParams } from 'react-router-dom';
 import { useAxios } from '../util/useAxios';
 
 const TwittCompo = ({ nowCategory, setNowCategory }) => {
 
+    // console.log(htmlCSSDummy);
 
     const [nowData, setNowData] = useState(descAllDummy);
 
@@ -55,24 +57,24 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
     const twitContainer = useRef();
 
 
-
     useEffect(() => {
         if (parmas.categoryName === undefined) setNowData(descAllDummy)
-        if (parmas.categoryName === '취업') setNowData(javascriptDummy)
-        if (parmas.categoryName === '블로깅') setNowData(javascriptDummy)
-        if (parmas.categoryName === 'JavaScript') setNowData(javascriptDummy)
-        if (parmas.categoryName === 'React') setNowData(reactDummy)
-        if (parmas.categoryName === 'Vue.js') setNowData(vueDummy)
-        if (parmas.categoryName === 'HTML&CSS') setNowData(htmlAndCssDummy)
-        if (parmas.categoryName === 'Spring') setNowData(springDummy)
-        if (parmas.categoryName === 'Java') setNowData(javaDummy)
-        if (parmas.categoryName === 'Python') setNowData(pythonDummy)
+        if (parmas.categoryName === '취업') setNowData(jobsearchArray)
+        // if (parmas.categoryName === '블로깅') setNowData(javascriptArray)
+        if (parmas.categoryName === 'JavaScript') setNowData(javascriptArray)
+        if (parmas.categoryName === 'React') setNowData(reactArray)
+        if (parmas.categoryName === 'Vue.js') setNowData(vueArray)
+        if (parmas.categoryName === 'HTML&CSS') setNowData(htmlCssArray)
+        if (parmas.categoryName === 'Spring') setNowData(springArray)
+        if (parmas.categoryName === 'Java') setNowData(javaArray)
+        if (parmas.categoryName === 'Python') setNowData(pythonArray)
 
     }, [parmas.categoryName])
 
     //twitContainer 는 ref 라서 이전의 값이 계속 반복문에 들어가는 현상 발생 > 
     // nowData.length 를 useEffect nowData 가 변경될 때마다 그 값으로 정렬해주면 해결
     useEffect(() => {
+
         function resizeGridItem(item) {
             let rowGap = 30;
 
@@ -123,16 +125,18 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
                 </Styled.ArticleInfo>
                 <Styled.TwitContainer ref={twitContainer}>
                     {nowData.map((tweet, idx) => {
+                        const media = tweet["미디어URL"] === '[]' ? [] : tweet["미디어URL"].slice(1, -1).replaceAll('\"', '').replaceAll(' ', '').split(',');
                         return (
                             <Tweet
                                 profile={gradientMap()[idx]}
-                                name={tweet.value3}
+                                name={tweet["유저네임"]}
                                 key={idx}
-                                link={tweet.value1}
-                                id={tweet.value3}
-                                contents={tweet.value5}
-                                retweet={tweet.value6}
-                                likes={tweet.value7}
+                                link={tweet["URL"]}
+                                id={tweet["스크린네임"]}
+                                contents={tweet["내용"]}
+                                media={media}
+                                retweet={tweet["리트윗수"]}
+                                likes={tweet["좋아요수"]}
                             />
                         );
                     })}

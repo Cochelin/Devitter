@@ -10080,3 +10080,5 @@ const vueDummy = [
         "작성일": "2022-10-04 08:12:37 +0900"
     },
 ]
+
+export default vueDummy;

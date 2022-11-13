@@ -36,10 +36,10 @@ const HeaderImgWrap = styled.div`
   }
 `;
 const LoginWrap = styled.div`
-  display: table-cell;
-  width: 50%;
-  text-align: right;
-  vertical-align: middle;
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   position: relative;
 `;
 const LoginBtn = styled.button`
@@ -60,22 +60,28 @@ const LoginBtn = styled.button`
   }
 `;
 const LogoutBtn = styled.button`
+justify-content: right;
   width: 48px;
   height: 48px;
   border: none;
-  padding: 10px;
-  background: linear-gradient(180deg, #62ff5f 0%, rgba(96, 70, 255, 0) 100%);
+  /* padding: 10px; */
+  /* background: linear-gradient(180deg, #62ff5f 0%, rgba(96, 70, 255, 0) 100%); */
+  background: url(${(props) => props.background});
+  background-size: contain;
   border-radius: 30px;
   margin-left: 16px;
   cursor: pointer;
   & img {
     margin: 0 auto;
+    width: 100%;
+    height: 100%;
   }
 `;
 
 const FlexWarp = styled.div`
   display: flex;
   align-items: center;
+  
 
   & a {
     display: flex;
@@ -100,7 +106,7 @@ const FlexWarp = styled.div`
   }
 `;
 const UserSpan = styled.span`
-  display: inline-block;
+  justify-content: right;
   @media screen and (max-width: 850px) {
     display: none;
   }
@@ -115,6 +121,7 @@ const Header = ({ forceUpdate }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(IsLogin);
   const [userName, setUserName] = useState('가나다');
+  const [userImage, setUserImage] = useState(ImgLogin);
 
   useEffect(() => {
     setModalOpen(!modalOpen);
@@ -127,12 +134,13 @@ const Header = ({ forceUpdate }) => {
         <LogoutModal setModalOpen={setModalOpen} setIsLogin={setIsLogin} />
       )
       : setIsLoginModal(
-        <LoginModal
-          setModalOpen={setModalOpen}
-          setIsLogin={setIsLogin}
+          <LoginModal
+            setModalOpen={setModalOpen}
+            setIsLogin={setIsLogin}
           setUserName={setUserName}
-        />
-      );
+          setUserImage={setUserImage}
+          />
+        );
 
     setModalOpen(!modalOpen);
   };
@@ -153,10 +161,10 @@ const Header = ({ forceUpdate }) => {
         {isLogin ? (
           <>
             <UserSpan>{userName}님</UserSpan>
-            <LogoutBtn onClick={LoginModalClick}>
-              <FlexWarp>
-                <img src={ImgLogin}></img>
-              </FlexWarp>
+            <LogoutBtn onClick={LoginModalClick} background={userImage}>
+              {/* <FlexWarp>
+                <img src={userImage} alt='user-profile'></img>
+              </FlexWarp> */}
             </LogoutBtn>
           </>
         ) : (
