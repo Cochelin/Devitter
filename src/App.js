@@ -16,12 +16,9 @@ function App() {
   const forceUpdate = useCallback(() => updateState({}), [])
   const { response, loading, error } = useAxios({
     method: 'GET',
-    url: `api/twitter?api_key=83d5785b7a7dafae360f68e66aceda9c&keyword="자바스크립트"&max_count=10`,
-    withCredentials: true,
+    url: `/tweet/get`
   });
 
-  response && loading && console.log(response)
-  error && console.log(error)
   return (
     <BrowserRouter>
       <LoadingPage />

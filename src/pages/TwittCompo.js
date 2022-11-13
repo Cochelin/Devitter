@@ -4,6 +4,7 @@ import * as Styled from './Home.style'
 import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
 import { Tweet } from '../components/Tweet';
 import { useParams } from 'react-router-dom';
+import { useAxios } from '../util/useAxios';
 
 const TwittCompo = ({ nowCategory, setNowCategory }) => {
 
@@ -93,7 +94,10 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
         window.addEventListener('resize', resizeAllGridItems);
     }, [nowData]);
 
-
+    const { response, loading, error } = useAxios({
+        method: 'GET',
+        url: `/tweet/get`,
+    });
     return (
         <>
             <Styled.Article>
@@ -111,6 +115,9 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
                                 <div className='category'>{parmas.categoryName}</div>
                             </>
 
+                    }
+                    {
+                        response && <p>response 완료 {response[0].tweet_name}</p>
                     }
 
                 </Styled.ArticleInfo>

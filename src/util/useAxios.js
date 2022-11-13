@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://api.hashscraper.com/';
+axios.defaults.baseURL = 'http://175.106.96.145:5000';
 // axios.defaults.withCredentials = true;
 
 export const useAxios = (axiosParams, auto = true) => {
