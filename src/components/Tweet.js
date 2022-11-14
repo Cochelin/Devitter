@@ -23,6 +23,7 @@ export const Tweet = ({
   key,
   name,
   id,
+  tweetId,
   contents,
   media,
   retweet,
@@ -104,7 +105,7 @@ export const Tweet = ({
 
 
   const BookMarkOn = (e) => {
-    modalSelect(user_id)
+    modalSelect(user_id, tweetId)
     toggleItem(e)
   }
   const toggleItem = (e) => {
@@ -123,8 +124,8 @@ export const Tweet = ({
         <Styled.BookMarkContianer
 
         >
-          <Styled.BackgroundSpan onClick={(e) =>
-            isLogin ? BookMarkOn() : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
+          <Styled.BackgroundSpan onClick={(e, tweetId) =>
+            isLogin ? BookMarkOn(e, tweetId) : confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')
           } props='props' background={`${BookMarkImg}`}>bookmark</Styled.BackgroundSpan>
           {/* <BookmarkEmpty /> */}
         </Styled.BookMarkContianer>

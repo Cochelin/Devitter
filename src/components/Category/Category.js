@@ -19,7 +19,7 @@ const Category = ({ nowCategory, setNowCategory }) => {
       인기트윗: [],
     },
     {
-      'For Junior': ['취업', '블로깅'],
+      'For Junior': ['취업'],
     },
     {
       Front: ['JavaScript', 'React', 'Vue.js', 'HTML&CSS'],

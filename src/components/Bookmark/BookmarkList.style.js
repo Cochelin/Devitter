@@ -2,6 +2,7 @@ import styled, { css } from "styled-components"
 import OpenFolder from './../../assets/img/opend_folder_icon.png'
 import CloseFolder from './../../assets/img/folder_icon.png'
 export const BookMarkWarp = styled.div`
+
 & .lastBtn {
     background-color: var(--point-green-color);
     color: white;
