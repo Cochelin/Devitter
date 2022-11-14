@@ -159,6 +159,7 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
                                 profile={tweet.profile}
                                 name={tweet.tweet_name}
                                 key={idx}
+                                tweetId={tweet.id}
                                 link={tweet.tweet_link}
                                 id={tweet.tweet_id}
                                 contents={tweet.tweet_content}

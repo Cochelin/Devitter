@@ -59,3 +59,8 @@ export const UserName = atom({
     key: 'UserName',
     default: '가나다',
 })
+
+export const bookmarkTweetId = atom({
+    key: 'bookmarkTweetId',
+    default: ''
+})

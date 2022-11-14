@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import SettingIcon from '../../assets/img/icon_setting.png'
 import { BookmarkSettingToggle } from '../../atom/atoms';
 import BookmarkList from './BookmarkList';
 const BookMarkCategory = styled.div`
+z-index: 11;
 position: fixed;
 top: 142px;
 left: 0;
@@ -27,6 +29,8 @@ border-radius: 3px;
     background-color: transparent;
 }
 
+
+
 `
 const Header = styled.div`
 display: flex;
@@ -45,6 +49,16 @@ border-bottom: 1px solid var(--dark-gray-color);
     border: none;
 }
 
+`
+const Upgrade = styled.div`
+& a{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 40px;
+    color: var(--point-green-color);
+}
 `
 
 const BookmarkCategory = () => {
@@ -67,6 +81,7 @@ const BookmarkCategory = () => {
 
             <BookmarkList />
 
+            <Upgrade><Link to='upgrade'>요금제 업그레이드</Link></Upgrade>
         </BookMarkCategory>
     );
 };

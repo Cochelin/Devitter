@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { BookMarkList, NowBookMark, updateState } from './../atom/atoms'
+import { BookMarkList, bookmarkTweetId, NowBookMark, updateState } from './../atom/atoms'
 import styled from 'styled-components';
 import BookmarkTweet from './BookmarkTweet';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useAxios } from '../util/useAxios';
+import BookMarkRander from './BookMarkRander';
 
 const TwitContainer = styled.div`
   display: grid;
@@ -67,6 +69,28 @@ const BookMarkContainer = ({ props }) => {
     // subId = 11
     let params = useParams();
     console.log(params)
+    const { response, loading, error, clickFetchFunc } = useAxios({
+
+    }, false);
+
+
+    useEffect(() => {
+        clickFetchFunc({
+            method: 'GET',
+            url: `/bookmark/tweets/sub?bookmark_id=${params.subId}`,
+        })
+
+    }, [params.subId])
+    const [BookmarkTweetId, setBookmarkTweetId] = useRecoilState(bookmarkTweetId)
+
+    useEffect(() => {
+        response && setBookmarkTweetId(response[0])
+    }, [response])
+
+    useEffect(() => {
+        response && console.log('북마크 리스트', BookmarkTweetId)
+    }, [BookmarkTweetId])
+
 
     const twitContainer = useRef();
     useEffect(() => {
@@ -154,31 +178,12 @@ const BookMarkContainer = ({ props }) => {
 
 
             <TwitContainer ref={twitContainer}>
-                <NoneBookmark>아직 추가된 북마크가 없습니다.<br /><Link to='/' onClick={forceUpdate}>북마크 추가하러 가기 </Link></NoneBookmark>
-                {
-                    // filterBookMarkDummy[0] ?
-                    //     filtersubBookMarkDummy[0].children.map((tweet, idx) => {
-                    //         const media = tweet["미디어URL"] === '[]' ? [] : tweet["미디어URL"].slice(1, -1).replaceAll('\"', '').replaceAll(' ', '').split(',');
-                    //         return (<BookmarkTweet
-                    //            profile={tweet["유저 프로파일 이미지"]}
-                    //             name={tweet["유저네임"]}
-                    //             key={idx}
-                    //             link={tweet["URL"]}
-                    //             id={tweet["스크린네임"]}
-                    //             contents={tweet["내용"]}
-                    //             media={media}
-                    //             retweet={tweet["리트윗수"]}
-                    //             likes={tweet["좋아요수"]}
-                    //         />)
-
-                    //     })
-                    // :
-
-                }
 
                 {
-
+                    response && BookmarkTweetId === '' ? <NoneBookmark>아직 추가된 북마크가 없습니다.<br /><Link to='/' onClick={forceUpdate}>북마크 추가하러 가기 </Link></NoneBookmark> : <BookMarkRander />
                 }
+
+
 
             </TwitContainer>
         </ Article>
