@@ -22,10 +22,6 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
     const [totalTweet, setTotalTweet] = useState([]);
     const [nowData, setNowData] = useState([]);
 
-
-    // useEffect(() => {
-    //     response && 
-    // }, [response])
     const parmas = useParams()
 
     const twitContainer = useRef();
@@ -55,8 +51,17 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
                     (el) => el.tweet_content.indexOf(badWords[i]) === -1 && el.tweet_name.indexOf(badUserName[0]) === -1 && (el.tweet_retweet > 20 || el.tweet_heart > 80)
                 );
             }
-
+            // 기본적으로 rt 많은 순서로 sort
+            // if (window.location.pathname === '/')
             array.sort((a, b) => b.tweet_retweet - a.tweet_retweet);
+            
+            // today 탭이 눌려있다면 날짜순으로 sort.
+            // console.log(parmas.categoryName);
+            // if (window.location.pathname === '/Today') {
+            //     console.log("today 눌렸습니다.")
+            //     array.sort((a,b) => new Date(b.date) - new Date(a.date))
+            // }
+            // sort된 array를 totalTweet으로 설정하기
             setTotalTweet(array)
             setNowData(array)
         }
@@ -67,9 +72,25 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
 
     useEffect(() => {
         if (response) {
-            if (parmas.categoryName === undefined) setNowData(totalTweet)
+            console.log(parmas)
+            // if (parmas.categoryName === undefined) setNowData(totalTweet.sort((a, b) => b.tweet_retweet - a.tweet_retweet));
+            if (window.location.pathname === '/') {
+                
+                setNowData(totalTweet.sort((a, b) => b.tweet_retweet - a.tweet_retweet));
+                setTotalTweet(totalTweet)
+            }
+            
+            if (window.location.pathname === '/Today') {
+                console.log("today 눌렸습니다.")
+                
+                setNowData(totalTweet.sort((a, b) => new Date(b.date) - new Date(a.date)))
+                setTotalTweet(totalTweet)
+            }    
+
+
+
+            if (parmas.categoryName === 'Today') setNowData(totalTweet.sort((a, b) => new Date(b.date) - new Date(a.date)))
             if (parmas.categoryName === '취업') setNowData(totalTweet.filter(el => el.category === 'jobsearch'))
-            // if (parmas.categoryName === '블로깅') setNowData(javascriptArray)
             if (parmas.categoryName === 'JavaScript') setNowData(totalTweet.filter(el => el.category === 'javascript'))
             if (parmas.categoryName === 'React') setNowData(totalTweet.filter(el => el.category === 'react'))
             if (parmas.categoryName === 'Vue.js') setNowData(totalTweet.filter(el => el.category === 'vue'))
@@ -77,6 +98,7 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
             if (parmas.categoryName === 'Spring') setNowData(totalTweet.filter(el => el.category === 'spring'))
             if (parmas.categoryName === 'Java') setNowData(totalTweet.filter(el => el.category === 'java'))
             if (parmas.categoryName === 'Python') setNowData(totalTweet.filter(el => el.category === 'python'))
+            
         }
 
 
@@ -106,7 +128,7 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
 
         response && window.addEventListener('resize', resizeAllGridItems);
     }, [nowData]);
-    response && console.log('nowData,', totalTweet[0])
+    // response && console.log('nowData,', totalTweet[0])
 
     return (
         <>
