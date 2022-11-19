@@ -180,7 +180,8 @@ const BookMarkContainer = ({ props }) => {
             <TwitContainer ref={twitContainer}>
 
                 {
-                    response && BookmarkTweetId === '' ? <NoneBookmark>아직 추가된 북마크가 없습니다.<br /><Link to='/' onClick={forceUpdate}>북마크 추가하러 가기 </Link></NoneBookmark> : <BookMarkRander />
+                    // response && BookmarkTweetId
+                    window.location.pathname==='/BookMark/1/10' ? <NoneBookmark>아직 추가된 북마크가 없습니다.<br /><Link to='/' onClick={forceUpdate}>북마크 추가하러 가기 </Link></NoneBookmark> : <BookMarkRander />
                 }
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as Styled from './Home.style'
 
-import { descAllDummy, javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray } from './filterDataMedia';
+import { descAllDummy, javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray } from './../components/filterDataMedia';
 // import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
 import { Tweet } from '../components/Tweet';
 import { useParams } from 'react-router-dom';
@@ -39,6 +39,8 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
             '。',
             '혐',
             '개웃',
+            '커미션',
+            '대통령',
 
         ];
         const badUserName = [
