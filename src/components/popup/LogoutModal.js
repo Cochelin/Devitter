@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import iconClose from '../../assets/img/icon_close.png'
 
-import { GoogleLogin } from 'react-google-login'
+import { GoogleLogout } from 'react-google-login'
+import { useNavigate } from 'react-router-dom';
 const ModalWrap = styled.div`
     width: 220px;
     padding: 18px;
@@ -40,25 +41,47 @@ const LoginWrap = styled.button`
     &:last-child {
         border-bottom:none;
     }
+    & button {
+        box-shadow: none !important;
+        width: 100% !important;
+    }
+    & button div {
+        display: flex;
+        align-items: center;
+    }
+    & button div svg {
+        transform: scale(0.8);
+    }
+    & button span {
+        width: 100% !important;
+        font-size: 13px !important;
+        font-weight: 400!important;
+        text-align: left !important;
+        font-family: "IBMPlexSansKR-Medium", Arial, Helvetica, sans-serif !important;
+    }
 `
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const LogoutModal = ({ setModalOpen, setIsLogin }) => {
+    const navigate = useNavigate()
 
     const onGoogleLogoutSuccess = (res) => {
         setIsLogin(false);
-        alert('성공적으로 로그아웃되었습니다');
+        // alert('성공적으로 로그아웃되었습니다');
+        sessionStorage.clear();
+        navigate('/')
 
     }
     return (
         <ModalWrap>
             <Close onClick={() => setModalOpen(false)} ><img src={iconClose} alt='close Button' /></Close>
             <LoginWrap>
-                <GoogleLogin
+                <GoogleLogout
                     client_id={CLIENT_ID}
                     buttonText='로그아웃'
-                    onSuccess={onGoogleLogoutSuccess}
+                    onLogoutSuccess={onGoogleLogoutSuccess}
                 />
+
             </LoginWrap>
         </ModalWrap>
     );

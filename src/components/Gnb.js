@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
+import React, { useCallback, useState } from 'react';
+import styled, { css } from "styled-components";
 import { Link } from 'react-router-dom';
 import BookMarker from '../assets/img/bookMarker_empty_16.png'
-import BookMarkerAcive from '../assets/img/bookMarker_active_16.png'
+import BookMarkerActive from '../assets/img/bookMarker_active_16.png'
 import IconGNbList from '../assets/img/icon_gnb_list.png'
 import IconGNbListActive from '../assets/img/icon_gnb_list_active.png'
 import { confirm } from './../components/popup/confirm'
+import { IsLogin, updateState } from '../atom/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Container = styled.div`
     display: table;
@@ -36,7 +38,14 @@ const ListClickArea = styled.div`
 & a {
     display:block;
     padding:10px;
-    text-decoration:none
+    text-decoration:none;
+    ${(p) =>
+        p.active &&
+        css`
+     color: var(--point-green-color);
+     `
+    }
+   
 }
 
 & a img {
@@ -44,15 +53,15 @@ const ListClickArea = styled.div`
     @media screen and (max-width: 850px) {
         margin-bottom:0;
     }
-
+   
 }
 
 & a img.IconGNbList{
-    margin-right:10px
+    margin-right:3px
 }
 & a img.BookMarker{
 margin-bottom:-2px;
-    margin-left:4px;
+    margin-left:0px;
     @media screen and (max-width: 850px) {
         margin-bottom:0;
     }
@@ -97,43 +106,73 @@ margin-bottom:-2px;
 `
 
 const Gnb = () => {
-    const [nowTab, setNowTab] = useState('all')
+    // const [nowTab, setNowTab] = useState('all')
     /*
     nowTab 
     all , today, bookmark
     */
+    function isActive(path) {
+        console.log('현위치: ', window.location.pathname);
+        console.log('트루펄스', path, window.location.pathname.startsWith(path))
 
+        return path.length < 2 ? window.location.pathname.endsWith(path) : window.location.pathname.startsWith(path);
+    }
+    //강제 재랜더링
+    const [, setUpdateState] = useRecoilState(updateState)
+    const forceUpdate = useCallback(() => setUpdateState({}), [])
+    const isLogin = useRecoilValue(IsLogin)
+
+    const gnbOnClick = () => {
+        if (!isLogin) {
+            // confirm('로그인 후 이용해주세요', '로그인', '취소');
+            forceUpdate()
+        }
+    }
     return (
         <Container>
             <FlexWarp>
-                <ListClickArea>
-                    <Link to='/' onClick={() => setNowTab('all')} className={nowTab === 'all' ? 'active' : null}>
+                <ListClickArea active={isActive('/')} >
+                    <Link onClick={forceUpdate} to='/'>
 
-                        {nowTab === 'all' ?
+                        {/* {nowTab === 'all' ?
                             <img className='IconGNbList' src={IconGNbListActive} /> :
                             <img className='IconGNbList' src={IconGNbList} />
-                        }
-                        전체
+                        } */}
+                        <img className='IconGNbList' src={isActive('/') ? IconGNbListActive : IconGNbList} /> 전체
 
                     </Link>
                 </ListClickArea>
-                <ListClickArea>
+                <ListClickArea active={isActive('/Today')}>
 
-                    <Link to='/' onClick={() => setNowTab('today')} className={nowTab === 'today' ? 'active' : null}>
+                    <Link onClick={forceUpdate} to='/Today'  >
 
                         Today
 
                     </Link>
                 </ListClickArea>
-                <ListClickArea>
-                    <Link to='/' onClick={() => confirm('로그인 후 이용 가능합니다.', '로그인하기', '취소')} className={nowTab === 'bookmark' ? 'active' : null}>
+                <ListClickArea active={isActive('/BookMark')}>
 
-                        북마크
-                        {nowTab === 'bookmark' ?
-                            <img className="BookMarker" src={BookMarkerAcive} /> :
-                            <img className="BookMarker" src={BookMarker} />}
+                    {
+                        isLogin ?
+                            <Link onClick={forceUpdate} to='/BookMark/1/10' >
 
-                    </Link>
+                                북마크  <img className="BookMarker" src={isActive('/BookMark') ? BookMarkerActive : BookMarker} />
+                                {/* {nowTab === 'bookmark' ?
+                            <img className="BookMarker" src={BookMarkerActive} /> :
+                            <img className="BookMarker" src={BookMarker} />} */}
+
+                            </Link>
+                            :
+                            <Link to='/BookMark/1/10' >
+
+                                북마크  <img className="BookMarker" src={isActive('/BookMark') ? BookMarkerActive : BookMarker} />
+                                {/* {nowTab === 'bookmark' ?
+                        <img className="BookMarker" src={BookMarkerActive} /> :
+                        <img className="BookMarker" src={BookMarker} />} */}
+
+                            </Link>
+                    }
+
                 </ListClickArea>
             </FlexWarp>
         </Container>

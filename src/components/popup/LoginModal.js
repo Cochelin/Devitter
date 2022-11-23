@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { GoogleLogin } from 'react-google-login';
 import iconClose from '../../assets/img/icon_close.png';
-import iconTwitter from '../../assets/img/icon_twitter.png';
-import iconGithub from '../../assets/img/icon-github.png';
-import iconGoogle from '../../assets/img/icon_google.png';
-// import NaverLogin from '../Login/NaverLogin';
-// import NaverLogout from '../Login/NaverLogout';
-
+import axios from 'axios';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { NowUserName, UserName } from '../../atom/atoms';
 const ModalWrap = styled.div`
   width: 220px;
   padding: 18px;
@@ -56,7 +53,7 @@ const LoginWrap = styled.button`
         align-items: center;
     }
     & button div svg {
-       transform: scale(0.8);
+        transform: scale(0.8);
     }
     & button span {
         width: 100% !important;
@@ -78,71 +75,97 @@ const GoogleImg = styled.img`
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 let data = '';
-const LoginModal = ({ setModalOpen, setIsLogin, setUserName }) => {
-    useEffect(() => {
-        function start() {
-            gapi.client.init({
-                clientId: CLIENT_ID,
-                scope: 'profile',
-            });
-        }
-        gapi.load('client:auth2', start);
-    });
-    if (gapi.auth) {
-        // 토큰 저장
-        let googleAccessToken = gapi.auth.getToken().access_token;
-        sessionStorage.setItem('google_access_token', googleAccessToken);
-        // console.log(sessionStorage.getItem('google_access_token'));
+const LoginModal = ({ setModalOpen, setIsLogin, setUserName, setUserImage }) => {
+  const userName = useRecoilValue(UserName)
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: CLIENT_ID,
+        scope: 'profile',
+      });
     }
+    gapi.load('client:auth2', start);
+  });
 
-    const onGoogleLoginSuccess = (res) => {
-        let name = res.profileObj.name;
-        // alert(`로그인되었습니다. ${name}님 안녕하세요.`);
-        //isLogin 상태 변경
-        setIsLogin(true);
-        setUserName(name);
-    };
 
-    const onGoogleLogInFailure = (res) => {
-        alert('로그인 실패:', res);
-    };
+  const onGoogleLoginSuccess = (res) => {
+    if (gapi.auth) {
+      let googleAccessToken = gapi.auth.getToken().access_token;
+      sessionStorage.setItem('access_token', googleAccessToken);// 토큰 저장
+      sessionStorage.setItem('email', res.profileObj.email);// 이메일 저장
 
-    return (
-        <ModalWrap>
-            <Close onClick={() => setModalOpen(false)}>
-                <img src={iconClose} alt='close Button' />
-            </Close>
 
-            {/*
-            <LoginWrap>
-                <TwitterImg src={iconTwitter} />
-                <p>트위터 로그인</p>
-            </LoginWrap>
+      // DB에 post
+      axios.post('http://175.106.96.145:5000/user/create', {
+        name: res.profileObj.name,
+        email: res.profileObj.email,
+        profile: res.profileObj.imageUrl,
+        nickname: res.profileObj.name, // 필요없을듯
+      }).then(function (response) {
+        console.log(response);
+      })
+        .catch(function (error) {
+          console.log(error);
+        });
 
-            <LoginWrap >
-                <div id="naver_id_login"><NaverLogin /></div>
+      let name = res.profileObj.name;
+      console.log(res.profileObj)
+      setIsLogin(true);
+      setUserName(name);
+      setUserImage(res.profileObj.imageUrl); // 프로필 이미지 설정
+    }
+  };
 
-                <NaverLogout />
-                <GithubImg id="naverIdLogin" src={iconGithub} />
-                <p>네이버 로그인</p>
-            </LoginWrap>
-            */}
+  const [userData, setUserData] = useState([])
+  const [nowUserId, setNowUserId] = useRecoilState(NowUserName)
+  useEffect(() => {
+    if (userName) {
+      axios.get('http://175.106.96.145:5000/user/get',)
+        .then(function (response) {
+          setUserData(response.data)
+          setNowUserId(response.data.filter(el => el.name === userName).pop().id)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    console.log('유저이름222', userName)
 
-            <LoginWrap type='button'>
-                <GoogleLogin
-                    client_id={CLIENT_ID}
-                    buttonText='로그인'
-                    onSuccess={onGoogleLoginSuccess}
-                    onFailure={onGoogleLogInFailure}
-                    cookiePolicy={'single_host_orgin'}
-                    isSignedIn={true}
-                />
 
-                {/* <GoogleImg src={iconGoogle} />
-                <p>구글 로그인</p> */}
-            </LoginWrap>
-        </ModalWrap>
-    );
+  }, [userName])
+  console.log('nowUserId', nowUserId)
+
+  // useEffect(() => {
+  //   console.log('유저이름', userName)
+  //   if (userData) {
+  //     const data = userData
+  //     console.log('유저데이터', userData)
+  //     // setNowUserName(data.id)
+  //   }
+
+  // }, [userData])
+  const onGoogleLogInFailure = (res) => {
+    alert('로그인을 다시 진행해주세요:', res);
+  };
+
+  return (
+    <ModalWrap>
+      <Close onClick={() => setModalOpen(false)}>
+        <img src={iconClose} alt='close Button' />
+      </Close>
+
+      <LoginWrap type='button'>
+        <GoogleLogin
+          client_id={CLIENT_ID}
+          buttonText='로그인'
+          onSuccess={onGoogleLoginSuccess}
+          onFailure={onGoogleLogInFailure}
+          cookiePolicy={'single_host_orgin'}
+          isSignedIn={true}
+        />
+      </LoginWrap>
+    </ModalWrap>
+  );
 };
 
 export default LoginModal;
