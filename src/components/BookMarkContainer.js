@@ -115,10 +115,6 @@ const BookMarkContainer = ({ props }) => {
     }, []);
 
 
-    const bookmarkDummy = useRecoilValue(BookMarkList)
-
-    const filterBookMarkDummy = bookmarkDummy.filter(el => el.id === +params.mainId);
-    const filtersubBookMarkDummy = ''
 
 
     // console.log(filtersubBookMarkDummy[0].children)
