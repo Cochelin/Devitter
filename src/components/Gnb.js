@@ -112,6 +112,7 @@ const Gnb = () => {
     all , today, bookmark
     */
     function isActive(path) {
+        console.log('현위치: ', window.location.pathname);
         console.log('트루펄스', path, window.location.pathname.startsWith(path))
 
         return path.length < 2 ? window.location.pathname.endsWith(path) : window.location.pathname.startsWith(path);

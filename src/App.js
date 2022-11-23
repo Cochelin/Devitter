@@ -19,7 +19,7 @@ function App() {
       <Gnb />
       <Routes>
         <Route path='/' element={<Home />} >
-          <Route path='/' element={<TwittCompo />} />
+          {window.location.pathname!=='/today' ? <Route path='/' element={<TwittCompo />} /> : null}
           <Route path=':categoryName' element={<TwittCompo />} />
         </Route>
         <Route path="/" element={<Navigate replace to="/" />} />

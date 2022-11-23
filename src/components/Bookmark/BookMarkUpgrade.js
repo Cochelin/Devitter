@@ -89,8 +89,6 @@ const BookMarkUpgrade = () => {
     return (
         <Wrap>
             <Head>요금제 업그레이드</Head>
-
-
             <WrapList>
                 <UpgradeList>
                     <Top>basic <span>For Free</span></Top>
@@ -107,7 +105,7 @@ const BookMarkUpgrade = () => {
                     <Button className=''>현재 사용중</Button>
                 </UpgradeList>
                 <UpgradeList>
-                    <Top>basic <span>For Free</span></Top>
+                    <Top>Regular </Top>
                     <ImgWarp> <img src={CircleImg} alt='img' /><span>2$</span>for  Month</ImgWarp>
 
                     <List>
@@ -127,7 +125,7 @@ const BookMarkUpgrade = () => {
                     <Button className='use'>이용하기</Button>
                 </UpgradeList>
                 <UpgradeList>
-                    <Top>basic <span>For Free</span></Top>
+                    <Top>Pro</Top>
                     <ImgWarp> <img src={CircleImg} alt='img' /><span>3$</span>for  Month</ImgWarp>
 
                     <List>
