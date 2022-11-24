@@ -11,7 +11,6 @@ import BookmarkLi from './BookmarkLi';
 import SubBookmarkAdd from './SubBookmarkAdd';
 
 const BookmarkList = () => {
-    const bookmarkDummy = useRecoilValue(BookMarkList)
     const [isupdate, updateState] = useRecoilState(UpdataeState)
     const forceUpdate = useCallback(() => updateState({}), [])
     const user_id = useRecoilValue(NowUserName)

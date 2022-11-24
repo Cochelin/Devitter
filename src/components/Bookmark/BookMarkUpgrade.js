@@ -89,8 +89,6 @@ const BookMarkUpgrade = () => {
     return (
         <Wrap>
             <Head>요금제 업그레이드</Head>
-
-
             <WrapList>
                 <UpgradeList>
                     <Top>basic <span>For Free</span></Top>

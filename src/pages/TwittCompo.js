@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as Styled from './Home.style'
-
-import { descAllDummy, javascriptArray, jobsearchArray, reactArray, htmlCssArray, vueArray, springArray, javaArray, pythonArray } from './../components/filterDataMedia';
 // import { descAllDummy, javascriptDummy, reactDummy, vueDummy, htmlAndCssDummy, springDummy, javaDummy, pythonDummy } from './filterData'
 import { Tweet } from '../components/Tweet';
 import { useParams } from 'react-router-dom';
@@ -56,7 +54,7 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
             // 기본적으로 rt 많은 순서로 sort
             // if (window.location.pathname === '/')
             array.sort((a, b) => b.tweet_retweet - a.tweet_retweet);
-            
+
             // today 탭이 눌려있다면 날짜순으로 sort.
             // console.log(parmas.categoryName);
             // if (window.location.pathname === '/Today') {
@@ -77,17 +75,17 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
             console.log(parmas)
             // if (parmas.categoryName === undefined) setNowData(totalTweet.sort((a, b) => b.tweet_retweet - a.tweet_retweet));
             if (window.location.pathname === '/') {
-                
+
                 setNowData(totalTweet.sort((a, b) => b.tweet_retweet - a.tweet_retweet));
                 setTotalTweet(totalTweet)
             }
-            
+
             if (window.location.pathname === '/Today') {
                 console.log("today 눌렸습니다.")
-                
+
                 setNowData(totalTweet.sort((a, b) => new Date(b.date) - new Date(a.date)))
                 setTotalTweet(totalTweet)
-            }    
+            }
 
 
 
@@ -100,7 +98,7 @@ const TwittCompo = ({ nowCategory, setNowCategory }) => {
             if (parmas.categoryName === 'Spring') setNowData(totalTweet.filter(el => el.category === 'spring'))
             if (parmas.categoryName === 'Java') setNowData(totalTweet.filter(el => el.category === 'java'))
             if (parmas.categoryName === 'Python') setNowData(totalTweet.filter(el => el.category === 'python'))
-            
+
         }
 
 

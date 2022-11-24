@@ -1,13 +1,8 @@
 import { atom } from 'recoil'
-import bookmarkList from '../static/BookmarkDummy'
 import { recoilPersist } from 'recoil-persist'
 
 const { persistAtom } = recoilPersist()
 
-export const BookMarkList = atom({
-    key: 'bookmarkList',
-    default: bookmarkList
-})
 
 export const IsLogin = atom({
     key: 'IsLogin',

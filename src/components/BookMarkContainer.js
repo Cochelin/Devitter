@@ -115,10 +115,6 @@ const BookMarkContainer = ({ props }) => {
     }, []);
 
 
-    const bookmarkDummy = useRecoilValue(BookMarkList)
-
-    const filterBookMarkDummy = bookmarkDummy.filter(el => el.id === +params.mainId);
-    const filtersubBookMarkDummy = ''
 
 
     // console.log(filtersubBookMarkDummy[0].children)
@@ -181,7 +177,7 @@ const BookMarkContainer = ({ props }) => {
 
                 {
                     // response && BookmarkTweetId
-                    window.location.pathname==='/BookMark/1/10' ? <NoneBookmark>아직 추가된 북마크가 없습니다.<br /><Link to='/' onClick={forceUpdate}>북마크 추가하러 가기 </Link></NoneBookmark> : <BookMarkRander />
+                    window.location.pathname === '/BookMark/1/10' ? <NoneBookmark>아직 추가된 북마크가 없습니다.<br /><Link to='/' onClick={forceUpdate}>북마크 추가하러 가기 </Link></NoneBookmark> : <BookMarkRander />
                 }
 
 
